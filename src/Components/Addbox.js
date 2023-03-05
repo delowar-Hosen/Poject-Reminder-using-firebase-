@@ -33,7 +33,7 @@ const Addbox = () => {
   };
 
   let handleArea = (e) => {
-    setArea(e.target.value);
+    console.log(e.target.value);
     setErr("");
   };
 
@@ -199,14 +199,21 @@ const Addbox = () => {
             placeholder="Enter Client Phone Number"
           />
         </p>
+
         <p className="font-san font-bold text-lg uppercase">
-          Client Area Name :
-          <input
+          Client Area Name :{" "}
+          <select
             onChange={handleArea}
-            value={area}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Client Area Name"
-          />
+            id="countries"
+            class="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+          >
+            <option selected>Choose a Area</option>
+            <option value="Bisra Kandi">Bisra Kandi</option>
+            <option value="Uttar Kulaura">Uttar Kulaura</option>
+            <option value="Hid Road">Hid Road</option>
+            <option value="Dakirpur">DakirPur</option>
+            <option value="Joi Chondi">JoiChondi</option>
+          </select>
         </p>
       </div>
       <div className="flex justify-between mt-8">

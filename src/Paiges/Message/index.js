@@ -2,7 +2,7 @@ import { getAuth } from "firebase/auth";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
-import Rechargelist from "../../Components/Rechargelist";
+import RechargePaidHistory from "../../Components/RechargePaidHistory";
 import Sidebar from "../../Components/Sidebar";
 
 const Message = () => {
@@ -31,10 +31,10 @@ const Message = () => {
           </div>
           <div className="flex">
             <div className="w-[10%]">
-              <Sidebar active="message" />
+              <Sidebar active="todo" />
             </div>
             <div className="w-[90%]">
-              <Rechargelist />
+              <RechargePaidHistory />
             </div>
           </div>
           {/* <Details /> */}

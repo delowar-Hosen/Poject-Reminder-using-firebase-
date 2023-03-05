@@ -1,5 +1,6 @@
 import React from "react";
 import { ImUsers, ImBoxAdd, ImBoxRemove } from "react-icons/im";
+import { RiTodoLine } from "react-icons/ri";
 import {
   AiFillAlert,
   AiFillSetting,
@@ -84,24 +85,22 @@ const Sidebar = ({ active }) => {
 
       <div
         className={`${
-          active == "message" &&
+          active == "todo" &&
           "relative  after:absolute after:py-8 after:px-[60px] after:bg-white after:rounded-l-[5px] rounded-r  after:top-[-9px] after:left-[-16px] z-50 after:z-[-1]"
         }`}
       >
         <Link to="/message">
-          <AiFillMessage
+          <RiTodoLine
             className={`${
-              active == "message"
-                ? "text-black text-5xl"
-                : "text-white text-5xl"
+              active == "todo" ? "text-black text-5xl" : "text-white text-5xl"
             }`}
           />
         </Link>
 
-        {active == "message" && (
+        {active == "todo" && (
           <div className=" w-24 absolute top-[-1px] right-[-56px] border-t border-black border-b ">
             <p className="font-san font-bold mr-1 text-[10px] text-right text-black    uppercase py-4 ">
-              Message
+              TO Do
             </p>
           </div>
         )}

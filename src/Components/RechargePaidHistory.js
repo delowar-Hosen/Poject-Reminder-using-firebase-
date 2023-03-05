@@ -3,12 +3,13 @@ import { BsSearch } from "react-icons/bs";
 import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import Search from "./Search";
 
-const Rechargelist = () => {
+const RechargePaidHistory = () => {
   const [addRecharge, setAddRecharge] = useState(false);
   const [boxUsers, setBoxUsers] = useState([]);
   const [rechargeList, setRechargeList] = useState([]);
   const [search, setSearch] = useState([]);
   const [searchErr, setSearchErr] = useState([]);
+  const [paidPage, setPaidPage] = useState(false);
 
   const db = getDatabase();
 
@@ -76,12 +77,16 @@ const Rechargelist = () => {
     });
   };
 
+  let handlePaid = () => {
+    setPaidPage(true);
+  };
+
   return (
     <div className=" p-5 mt-10">
       {addRecharge ? (
         <div className="w-full relative ">
           <h2 className="font-san text-center  font-bold text-5xl ">
-            ADD RECHARGE LIST
+            ADD PAID LIST
           </h2>
           <button
             onClick={() => setAddRecharge(!addRecharge)}
@@ -94,13 +99,13 @@ const Rechargelist = () => {
         <div>
           <div className="w-full relative ">
             <h2 className="font-san text-center  font-bold text-5xl ">
-              RECHARGE LIST
+              RECHARGE PAID HISTORY
             </h2>
             <button
               onClick={() => setAddRecharge(!addRecharge)}
               className="font-san py-3 px-3 absolute top-0 right-[165px]  bg-black text-white rounded-md font-bold text-lg uppercase text-right"
             >
-              Add Recharge List
+              Go To Recharge List
             </button>
           </div>
           <div className="mt-8 flex">
@@ -114,13 +119,13 @@ const Rechargelist = () => {
               STB ID Number{" "}
             </p>
             <p className="font-san font-bold text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
-              Area Name{" "}
+              Paid By{" "}
             </p>
             <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[130px]">
-              Issue Date{" "}
+              Paid Date{" "}
             </p>
             <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[110px]">
-              Status{" "}
+              Paid Taka{" "}
             </p>
             <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[200px]">
               Recharge Start Date
@@ -144,10 +149,10 @@ const Rechargelist = () => {
                 {item.areaname}
               </p>
               <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[130px]">
-                Issue Date{" "}
+                Paid Date{" "}
               </p>
               <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[110px]">
-                Status{" "}
+                Paid Taka{" "}
               </p>
               <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[200px]">
                 {item.RechargeStartDate}
@@ -177,17 +182,14 @@ const Rechargelist = () => {
             <p className="font-san font-bold text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
               Area Name{" "}
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[130px]">
-              Issue Date{" "}
+            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
+              Recharge Start Date
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[110px]">
-              Status{" "}
-            </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[180px]">
-              Phone Number{" "}
+            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
+              Recharge End Date
             </p>
             <button className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]">
-              Add Recharge List
+              Add Paid List
             </button>
           </div>
           {search.length > 0
@@ -205,19 +207,14 @@ const Rechargelist = () => {
                   <p className="font-san font-normal text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
                     {item.areaname}
                   </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[130px]">
+                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
                     {item.issueDate}
                   </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[110px]">
-                    Status{" "}
-                  </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[180px]">
+
+                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
                     {item.phone}
                   </p>
-                  <button
-                    onClick={() => handleRecharge(item)}
-                    className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]"
-                  >
+                  <button className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]">
                     Recharge
                   </button>
                 </div>
@@ -236,27 +233,35 @@ const Rechargelist = () => {
                   <p className="font-san font-normal text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
                     {item.areaname}
                   </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[130px]">
+                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
                     {item.issueDate}
                   </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[110px]">
-                    Status{" "}
-                  </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[180px]">
+
+                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
                     {item.phone}
                   </p>
                   <button
-                    onClick={() => handleRecharge(item)}
+                    onClick={handlePaid}
                     className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]"
                   >
-                    Recharge
+                    Paid
                   </button>
                 </div>
               ))}
+        </div>
+      )}
+      {paidPage && (
+        <div className="w-full h-screen bg-[#00000031] fixed top-0 left-0 z-50 flex justify-center items-center">
+          <div>
+            <h3>Paid Your Bill</h3>
+            <div>
+              <input placeholder="hello paid" />
+            </div>
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export default Rechargelist;
+export default RechargePaidHistory;

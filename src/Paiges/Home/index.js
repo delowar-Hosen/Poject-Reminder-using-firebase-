@@ -9,9 +9,11 @@ import Rechargereminder from "../../Components/Rechargereminder";
 import Settings from "../../Components/Settings";
 import Sidebar from "../../Components/Sidebar";
 import Userlist from "../../Components/Userlist";
+import { getDatabase, ref, onValue } from "firebase/database";
 
 const Home = () => {
   const [varify, setVarify] = useState(false);
+  const [boxUsers, setBoxUsers] = useState([]);
 
   const auth = getAuth();
   const navigate = useNavigate();
@@ -27,6 +29,7 @@ const Home = () => {
       }
     }
   }, []);
+
   return (
     <>
       {varify && (

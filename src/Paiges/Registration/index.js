@@ -8,7 +8,7 @@ import {
   updateProfile,
   sendEmailVerification,
 } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, push } from "firebase/database";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -83,7 +83,7 @@ const Registration = () => {
                 .then(() => {
                   setSuccess("");
                   setSuccess("Your Registration Is Complete");
-                  set(ref(db, "users/"), {
+                  set(push(ref(db, "users/")), {
                     name: name,
                     email: email,
                     id: auth.currentUser.uid,

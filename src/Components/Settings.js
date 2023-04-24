@@ -1,27 +1,47 @@
 import React from "react";
 
-import { AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
+import { AiTwotoneEdit, AiFillDelete, AiFillSave } from "react-icons/ai";
 import {
   BsChatDotsFill,
   BsFillMoonStarsFill,
   BsFillSunFill,
+  BsFillSimFill,
 } from "react-icons/bs";
 import { IoIosPhotos, IoIosContrast } from "react-icons/io";
 import { IoHelpCircleOutline } from "react-icons/io5";
-import { FaKey } from "react-icons/fa";
+import { FaUserEdit, FaCreditCard } from "react-icons/fa";
+import { MdOutlineCancelPresentation } from "react-icons/md";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { getDatabase, db, set, ref, onValue } from "firebase/database";
+import {
+  getDatabase,
+  db,
+  set,
+  ref,
+  onValue,
+  push,
+  remove,
+} from "firebase/database";
+import Search from "./Search";
 
 const Settings = () => {
   const [user, setUser] = useState([]);
   const [editName, setEditName] = useState("");
   const [nameEdit, setNameEdit] = useState(false);
+  const [fNameEdit, setfNameEdit] = useState(false);
+  const [idEdit, setIdEdit] = useState(false);
+  const [editNumber, setEditNumber] = useState(false);
+  const [clientNameEdit, setClientNameEdit] = useState(false);
+  const [clientFatherNameEdit, setClientFatherNameEdit] = useState(false);
+  const [editNationalId, setEditNationalId] = useState(false);
+  const [phoneEdit, setPhoneEdit] = useState(false);
   const [passwordEdit, setPasswordEdit] = useState(false);
   const [bg, setBg] = useState(false);
   const [email, setEmail] = useState("");
   const [resetP, setResetP] = useState("");
+  const [boxUsers, setBoxUsers] = useState([]);
+  const [search, setSearch] = useState([]);
 
   const [theme, setTheme] = useState("light");
 
@@ -81,29 +101,70 @@ const Settings = () => {
       });
   };
 
-  let handleMode = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+  let arr = [];
+
+  let handleSearch = (e) => {
+    boxUsers.filter((item) => {
+      if (e.target.value != "") {
+        if (
+          item.clientName.toLowerCase().includes(e.target.value.toLowerCase())
+        ) {
+          arr.push(item);
+        } else if (
+          item.boxId.toLowerCase().includes(e.target.value.toLowerCase())
+        ) {
+          arr.push(item);
+        } else if (item.phone.includes(e.target.value)) {
+          arr.push(item);
+        }
+      } else {
+        arr = [];
+      }
+      setSearch(arr);
+    });
   };
 
   useEffect(() => {
-    document.body.className = theme;
-  }, [theme]);
+    const starCountRef = ref(db, "boxusers/");
+    onValue(starCountRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push({ ...item.val(), key: item.key });
+      });
+      setBoxUsers(arr)
+    });
+  }, []);
 
-  let handleTheme = () => {
-    setBg(true);
-    setTimeout(() => {
-      setBg(false);
-    }, 2000);
+  let handleEditSave = (item) => {
+    setClientNameEdit(false)
+    setClientFatherNameEdit(false)
+    setPhoneEdit(false)
+    
+    set(push(ref(db, "boxusers/")), {
+      clientName: `${editName ? editName : item.clientName}`,
+      fatherName: `${fNameEdit ? fNameEdit : item.fatherName}`,
+      phone: `${editNumber ? editNumber : item.phone}`,
+      clientNationId: `${idEdit ? idEdit : item.clientNationId}`,
+      boxId: item.boxId,
+      areaname: item.areaname,
+      montlyBill: item.montlyBill,
+      boxPrice: item.boxPrice,
+      managername: item.managername,
+      editDate: new Date(),
+    }).then(() => {
+      remove(ref(db, "boxusers/" + item.key));
+      
+    });
+  };
+
+  let handleDeleteBox = (item) => {
+    remove(ref(db, "boxusers/" + item.key));
   };
 
   return (
     <div className={`mt-[20px] ml-[43px] p-5 userSetings ${theme} `}>
       <div className="flex  gap-x-10 mt-9">
-        <div className="w-[500px] p-6 border border-[#c9c5c542] rounded-md">
+        <div className="w-1/2 p-6 border border-[#c9c5c542] rounded-md">
           <h3 className="font-pop font-semibold text-xl mb-10">
             Profile Settings
           </h3>
@@ -171,62 +232,213 @@ const Settings = () => {
             </p>
           </div>
         </div>
-        <div className="w-[500px] p-6 border border-[#c9c5c542] rounded-md">
-          <h3 className="font-pop font-semibold text-xl mb-10">
-            Account Settings
-          </h3>
-
-          <div className="pl-[43px] flex flex-col gap-y-8">
-            {passwordEdit ? (
-              <span className="font-pop font-normal text-xl text-[#df4a4a]">
-                {resetP}
-              </span>
-            ) : (
-              <p onClick={handlePasswordReset} className="flex items-center">
-                <FaKey className="text-[27px]  mr-9 " />
-                <span className="font-pop font-normal text-xl">
-                  Change Password
-                </span>
-              </p>
-            )}
-
-            <p className="flex items-center">
-              <IoIosContrast className="text-[27px] mr-9 " />
-
-              {bg ? (
-                <div className="flex items-center bg-slate-500 w-[80px] rounded-lg">
-                  {theme === "dark" ? (
-                    <button
-                      className="bg-white py-1 px-4 rounded-lg text-[#FFE87C]"
-                      onClick={handleMode}
-                    >
-                      <BsFillSunFill />
-                    </button>
-                  ) : (
-                    <button
-                      className="bg-black ml-[32px] py-1 px-4 rounded-lg text-[#FEFCD7]"
-                      onClick={handleMode}
-                    >
-                      <BsFillMoonStarsFill />
-                    </button>
-                  )}
-                </div>
-              ) : (
-                <span
-                  onClick={handleTheme}
-                  className=" font-pop font-normal text-xl"
-                >
-                  Change Theme.
-                </span>
-              )}
-            </p>
-            <p className="flex items-center">
-              <AiFillDelete className="text-[27px] mr-9 " />
-              <span className="font-pop font-normal text-xl">
-                Delete Account.
-              </span>
-            </p>
+        <div className="w-1/2  p-6 border border-[#c9c5c542] rounded-md">
+          <div>
+            <h3 className="font-pop font-semibold  text-xl mb-5">
+              Box ID Settings
+            </h3>
+            <div className="mb-5">
+              <Search state={handleSearch} />
+            </div>
           </div>
+
+          {search.length > 0 ? (
+            search.map((item) => (
+              <div className="pl-[43px] flex flex-col gap-y-8">
+                {clientNameEdit ? (
+                  <div className="flex gap-x-1 items-center">
+                    <input
+                      placeholder="Edit Client Name"
+                      onChange={handleEditState}
+                      className="py-2 px-2 font-pop font-semibold text-base outline-0 w-[70%]"
+                    />
+                    <div className="flex gap-x-2 items-center">
+                      <MdOutlineCancelPresentation
+                        onClick={() => setClientNameEdit(false)}
+                        className="text-[27px]"
+                      />
+                      <AiFillSave
+                        onClick={() => handleEditSave(item)}
+                        className="text-[27px]  ml-9 "
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <p className="flex items-center group">
+                    <FaUserEdit className="text-[27px]  mr-9 " />
+                    <span className="font-pop font-normal text-xl">
+                      {item.clientName}
+                    </span>
+                    <AiTwotoneEdit
+                      onClick={() => setClientNameEdit(true)}
+                      className="text-[27px] hidden  ml-9 group-hover:block  "
+                    />
+                  </p>
+                )}
+
+                {clientFatherNameEdit ? (
+                  <div className="flex gap-x-1 items-center">
+                    <input
+                      placeholder="Edit Client Father  Name"
+                      onChange={(e) => setfNameEdit(e.target.value)}
+                      className="py-2 px-2 font-pop font-semibold text-base outline-0 w-[70%]"
+                    />
+                    <div className="flex gap-x-2 items-center">
+                      <MdOutlineCancelPresentation
+                        onClick={() => setClientFatherNameEdit(false)}
+                        className="text-[27px]"
+                      />
+                      <AiFillSave
+                        onClick={() => handleEditSave(item)}
+                        className="text-[27px]  ml-9 "
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <p className="flex items-center group">
+                    <FaUserEdit className="text-[27px]  mr-9 " />
+                    <span className="font-pop font-normal text-xl">
+                      {item.fatherName}
+                    </span>
+                    <AiTwotoneEdit
+                      onClick={() => setClientFatherNameEdit(true)}
+                      className="text-[27px] hidden  ml-9 group-hover:block  "
+                    />
+                  </p>
+                )}
+
+                {editNationalId ? (
+                  <div className="flex gap-x-1 items-center">
+                    <input
+                      placeholder="Edit National Id Number"
+                      onChange={(e) => setIdEdit(e.target.value)}
+                      className="py-2 px-2 font-pop font-semibold text-base outline-0 w-[70%]"
+                    />
+                    <div className="flex gap-x-2 items-center">
+                      <MdOutlineCancelPresentation
+                        onClick={() => setEditNationalId(false)}
+                        className="text-[27px]"
+                      />
+                      <AiFillSave
+                        onClick={() => handleEditSave(item)}
+                        className="text-[27px]  ml-9 "
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <p
+                    onClick={handlePasswordReset}
+                    className="flex items-center group"
+                  >
+                    <FaCreditCard className="text-[27px]  mr-9 " />
+                    <span className="font-pop font-normal text-xl">
+                      {item.clientNationId}
+                    </span>
+                    <AiTwotoneEdit
+                      onClick={() => setEditNationalId(true)}
+                      className="text-[27px] hidden  ml-9 group-hover:block  "
+                    />
+                  </p>
+                )}
+
+                {phoneEdit ? (
+                  <div className="flex gap-x-1 items-center">
+                    <input
+                      placeholder="Edit Phone Number"
+                      onChange={(e) => setEditNumber(e.target.value)}
+                      className="py-2 px-2 font-pop font-semibold text-base outline-0 w-[70%]"
+                    />
+                    <div className="flex gap-x-2 items-center">
+                      <MdOutlineCancelPresentation
+                        onClick={() => setPhoneEdit(false)}
+                        className="text-[27px]"
+                      />
+                      <AiFillSave
+                        onClick={() => handleEditSave(item)}
+                        className="text-[27px]  ml-9 "
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <p
+                    onClick={handlePasswordReset}
+                    className="flex items-center group"
+                  >
+                    <BsFillSimFill className="text-[27px]  mr-9 " />
+                    <span className="font-pop font-normal text-xl">
+                      {item.phone}
+                    </span>
+                    <AiTwotoneEdit
+                      onClick={() => setPhoneEdit(true)}
+                      className="text-[27px] hidden  ml-9 group-hover:block  "
+                    />
+                  </p>
+                )}
+
+                <p className="flex items-center cursor-pointer">
+                  <AiFillDelete className="text-[27px] mr-9 " />
+                  <span
+                    onClick={() => handleDeleteBox(item)}
+                    className="font-pop font-normal text-xl"
+                  >
+                    Delete Box Account.
+                  </span>
+                </p>
+              </div>
+            ))
+          ) : (
+            <div className="pl-[43px] flex flex-col gap-y-8">
+              <p className="flex items-center">
+                <FaUserEdit className="text-[27px]  mr-9 " />
+                <p className=" w-full font-pop font-normal text-xl relative group">
+                  Edit Client Name
+                  <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
+                    Please Search For Change
+                  </span>
+                </p>
+              </p>
+
+              <p className="flex items-center">
+                <FaUserEdit className="text-[27px]  mr-9 " />
+                <p className=" w-full font-pop font-normal text-xl relative group">
+                  Edit Client Father Name
+                  <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
+                    Please Search For Change
+                  </span>
+                </p>
+              </p>
+
+              <p className="flex items-center">
+                <FaCreditCard className="text-[27px]  mr-9 " />
+                <p className=" w-full font-pop font-normal text-xl relative group">
+                  Edit Client National Id
+                  <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
+                    Please Search For Change
+                  </span>
+                </p>
+              </p>
+
+              <p className="flex items-center">
+                <BsFillSimFill className="text-[27px]  mr-9 " />
+                <p className=" w-full font-pop font-normal text-xl relative group">
+                  Edit Client Phone Number
+                  <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
+                    Please Search For Change
+                  </span>
+                </p>
+              </p>
+
+              <p className="flex items-center">
+                <AiFillDelete className="text-[27px] mr-9 " />
+                <p className=" w-full font-pop font-normal text-xl relative group">
+                  Delete Box Account
+                  <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
+                    Please Search For Delete
+                  </span>
+                </p>
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

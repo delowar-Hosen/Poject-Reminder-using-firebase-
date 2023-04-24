@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
-import { getDatabase, ref, onValue, set, push } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  set,
+  push,
+  remove,
+} from "firebase/database";
 import Search from "./Search";
 import { useDispatch, useSelector } from "react-redux";
 import { paid } from "../reduxToolkit/paidSlice";
@@ -63,7 +70,7 @@ const RechargePaidHistory = () => {
     onValue(starCountRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        arr.push(item.val());
+        arr.push({ ...item.val(), key: item.key });
       });
       setRechargeList(arr);
     });
@@ -113,7 +120,7 @@ const RechargePaidHistory = () => {
     setPaidErr("");
   };
 
-  let handleRechargePaid = () => {
+  let handleRechargePaid = (paidData) => {
     setPaidErr("");
     setPaidSuccess("");
     if (!paidBy) {
@@ -135,9 +142,12 @@ const RechargePaidHistory = () => {
         RechargeStartDate: paidData.RechargeStartDate,
         RechargeEndDate: paidData.RechargeEndDate,
         paidDate: startLocalFormat,
+        id: paidData.id,
       }).then(() => {
         setPaidSuccess("Your Recharge Name Added Recharge Paid History List");
+
         setTimeout(() => {
+          remove(ref(db, "rechargeList/" + paidData.key));
           setPaidSuccess("");
           setPaidErr("");
           setPaidBy("");
@@ -372,7 +382,7 @@ const RechargePaidHistory = () => {
                     Cancel
                   </button>
                   <button
-                    onClick={handleRechargePaid}
+                    onClick={() => handleRechargePaid(paidData)}
                     className="font-san font-semibold text-lg py-2 px-3 rounded-lg bg-slate-900 text-white"
                   >
                     Paid

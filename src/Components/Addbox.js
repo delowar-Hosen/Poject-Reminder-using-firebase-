@@ -33,7 +33,7 @@ const Addbox = () => {
   };
 
   let handleArea = (e) => {
-    console.log(e.target.value);
+    setArea(e.target.value);
     setErr("");
   };
 

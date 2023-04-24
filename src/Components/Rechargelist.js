@@ -9,6 +9,7 @@ const Rechargelist = () => {
   const [rechargeList, setRechargeList] = useState([]);
   const [search, setSearch] = useState([]);
   const [searchErr, setSearchErr] = useState([]);
+  const [isRunning, setIsRunning] = useState([]);
 
   const db = getDatabase();
 
@@ -33,6 +34,7 @@ const Rechargelist = () => {
       managername: item.managername,
       RechargeStartDate: startLocalFormat,
       RechargeEndDate: endLocalFormat,
+      id: item.id,
     });
   };
 
@@ -41,7 +43,7 @@ const Rechargelist = () => {
     onValue(starCountRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        arr.push(item.val());
+        arr.push({ ...item.val(), id: item.key });
       });
       setBoxUsers(arr);
     });
@@ -51,14 +53,17 @@ const Rechargelist = () => {
     const starCountRef = ref(db, "rechargeList/");
     onValue(starCountRef, (snapshot) => {
       let arr = [];
+      let rechargeArr = [];
       snapshot.forEach((item) => {
         arr.push(item.val());
+        rechargeArr.push(item.val().id);
       });
       setRechargeList(arr);
+      setIsRunning(rechargeArr);
     });
   }, []);
-  let arr = [];
 
+  let arr = [];
   let handleSearch = (e) => {
     boxUsers.filter((item) => {
       if (e.target.value != "") {
@@ -214,12 +219,19 @@ const Rechargelist = () => {
                   <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[180px]">
                     {item.phone}
                   </p>
-                  <button
-                    onClick={() => handleRecharge(item)}
-                    className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]"
-                  >
-                    Recharge
-                  </button>
+
+                  {isRunning.includes(item.id) ? (
+                    <button className="font-san font-semibold ml-[10px] text-base flex justify-center items-center border border-solid py-3 bg-black text-white w-[200px]">
+                      Running
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleRecharge(item)}
+                      className="font-san font-semibold ml-[10px] text-base flex justify-center items-center border border-solid py-3 bg-black text-white w-[200px]"
+                    >
+                      Recharge
+                    </button>
+                  )}
                 </div>
               ))
             : boxUsers.map((item, index) => (
@@ -245,12 +257,18 @@ const Rechargelist = () => {
                   <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[180px]">
                     {item.phone}
                   </p>
-                  <button
-                    onClick={() => handleRecharge(item)}
-                    className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]"
-                  >
-                    Recharge
-                  </button>
+                  {isRunning.includes(item.id) ? (
+                    <button className="font-san font-semibold ml-[10px] text-base flex justify-center items-center border border-solid py-3 bg-black text-white w-[200px]">
+                      Running
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleRecharge(item)}
+                      className="font-san font-semibold ml-[10px] text-base flex justify-center items-center border border-solid py-3 bg-black text-white w-[200px]"
+                    >
+                      Recharge
+                    </button>
+                  )}
                 </div>
               ))}
         </div>

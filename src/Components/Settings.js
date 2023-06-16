@@ -1,19 +1,25 @@
 import React from "react";
 
-import { AiTwotoneEdit, AiFillDelete, AiFillSave } from "react-icons/ai";
+import {
+  AiTwotoneEdit,
+  AiFillDelete,
+  AiFillSave,
+  AiOutlineCloudUpload,
+} from "react-icons/ai";
 import {
   BsChatDotsFill,
   BsFillMoonStarsFill,
   BsFillSunFill,
   BsFillSimFill,
 } from "react-icons/bs";
+
 import { IoIosPhotos, IoIosContrast } from "react-icons/io";
 import { IoHelpCircleOutline } from "react-icons/io5";
 import { FaUserEdit, FaCreditCard } from "react-icons/fa";
 import { MdOutlineCancelPresentation } from "react-icons/md";
 import { useEffect } from "react";
 import { useState } from "react";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+import { getAuth, sendPasswordResetEmail, deleteUser } from "firebase/auth";
 import {
   getDatabase,
   db,
@@ -25,6 +31,7 @@ import {
 } from "firebase/database";
 import Search from "./Search";
 import DocumentReader from "./DocumentReader";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
   const [user, setUser] = useState([]);
@@ -46,6 +53,7 @@ const Settings = () => {
   const [search, setSearch] = useState([]);
 
   const [theme, setTheme] = useState("light");
+  const navigate = useNavigate();
 
   const auth = getAuth();
   const db = getDatabase();
@@ -74,11 +82,13 @@ const Settings = () => {
   };
 
   let handleSaveEditName = (item) => {
-    set(ref(db, "users/" + item.id), {
+    console.log(item);
+    set(ref(db, "users/" + item.key), {
       name: editName,
       email: item.email,
-      photoURL: item.photoURL,
+      avatar: item.avatar,
       id: item.id,
+      created: `${new Date().toLocaleDateString()}`,
     }).then(() => {
       setEditName("");
       setNameEdit(false);
@@ -162,6 +172,29 @@ const Settings = () => {
     remove(ref(db, "boxusers/" + item.key));
   };
 
+  let handleReset = () => {
+    remove(ref(db, "boxusers/"));
+    remove(ref(db, "paidList/"));
+    remove(ref(db, "rechargeList/"));
+  };
+
+  let handleHardReset = () => {
+    remove(ref(db, "areas/"));
+    let user = auth.currentUser;
+    remove(ref(db, "users/" + auth.currentUser.uid));
+    deleteUser(user)
+      .then(() => {
+        console.log("delete");
+      })
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => {
+        // An error ocurred
+        // ...
+      });
+  };
+
   return (
     <div className="w-[90%] m-auto">
       <div className="flex  gap-x-10 mt-4">
@@ -176,10 +209,19 @@ const Settings = () => {
             </h3>
             {user.map((item) => (
               <div className="flex pb-8 border-b border-[#8a84848e]">
-                <img
-                  src={item.photoURL}
-                  className="w-[100px] h-[100px]  rounded-full"
-                />
+                <div className="relative group">
+                  <img
+                    className=" mt-3 ml-4 w-[70px] h-[70px] border border-solid border-[#000] p-1 rounded-full"
+                    src={item.avatar}
+                  />
+                  <div className="absolute top-[12px] left-[16px]">
+                    <div className="hidden group-hover:block ease-linear">
+                      <div className="   w-[70px] h-[70px] rounded-full text-white bg-[#00000069] flex justify-center items-center">
+                        <AiOutlineCloudUpload />
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="ml-8 mt-2">
                   {nameEdit ? (
                     <div className="flex gap-x-1 items-center">
@@ -229,11 +271,17 @@ const Settings = () => {
                   Store Your Document
                 </span>
               </p>
-              <p className="flex items-center cursor-pointer">
+              <p
+                onClick={handleReset}
+                className="flex items-center cursor-pointer"
+              >
                 <IoIosPhotos className="text-[27px] mr-9 " />
                 <span className="font-pop font-normal text-xl">Reset</span>
               </p>
-              <p className="flex items-center cursor-pointer">
+              <p
+                onClick={handleHardReset}
+                className="flex items-center cursor-pointer"
+              >
                 <IoHelpCircleOutline className="text-[27px] mr-9 " />
                 <span className="font-pop font-normal text-xl">Hard Reset</span>
               </p>

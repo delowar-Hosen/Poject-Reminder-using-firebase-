@@ -11,7 +11,6 @@ const Addbox = () => {
   const [bill, setBill] = useState("");
   const [price, setPrice] = useState("");
   const [mName, setMName] = useState("");
-  const [issueDate, setIssueDate] = useState("");
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -59,11 +58,6 @@ const Addbox = () => {
 
   let handleAreaManagerName = (e) => {
     setMName(e.target.value);
-    setErr("");
-  };
-
-  let handleIssueDate = (e) => {
-    setIssueDate(e.target.value);
     setErr("");
   };
 
@@ -124,7 +118,7 @@ const Addbox = () => {
         montlyBill: bill,
         boxPrice: price,
         managername: mName,
-        issueDate: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}-${new Date().getHours()}-${new Date().getMinutes()}`,
+        issueDate: `${new Date().toLocaleDateString()}`,
       })
         .then(() => {
           setErr("");
@@ -176,7 +170,7 @@ const Addbox = () => {
             <input
               onChange={handleClientName}
               value={cName}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal ml-1 rounded-lg w-[400px] text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
               placeholder="Client Name"
             />
           </p>
@@ -185,7 +179,7 @@ const Addbox = () => {
             <input
               onChange={handleFaterName}
               value={fName}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal ml-1 rounded-lg w-[270px]  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
               placeholder="Father/Husband Name"
             />
           </p>
@@ -194,7 +188,7 @@ const Addbox = () => {
             <input
               onChange={handlePhone}
               value={phone}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal ml-1 rounded-lg  w-[327px] text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
               placeholder="Enter Client Phone Number"
             />
           </p>
@@ -204,7 +198,7 @@ const Addbox = () => {
             <select
               onChange={handleArea}
               id="countries"
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal ml-1 rounded-lg w-[360px]  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
             >
               <option selected>Choose a Area</option>
               <option value="Bisra Kandi">Bisra Kandi</option>
@@ -219,7 +213,7 @@ const Addbox = () => {
             <input
               onChange={handleId}
               value={iD}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal w-[286px] ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
               placeholder="Enter Client National Id Number"
             />
           </p>
@@ -230,7 +224,7 @@ const Addbox = () => {
             <input
               onChange={handleBoxId}
               value={boxId}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal ml-1 rounded-lg w-[300px]  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
               placeholder="Enter Box Id Number"
             />
           </p>
@@ -239,7 +233,7 @@ const Addbox = () => {
             <input
               onChange={handlePrice}
               value={price}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal ml-1 rounded-lg w-[341px]  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
               placeholder="Enter Client National Id Number"
             />
           </p>
@@ -248,7 +242,7 @@ const Addbox = () => {
             <input
               onChange={handleBill}
               value={bill}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal ml-1 rounded-lg w-[312px] text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
               placeholder="Enter Monthly Bill"
             />
           </p>
@@ -257,17 +251,8 @@ const Addbox = () => {
             <input
               onChange={handleAreaManagerName}
               value={mName}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              className="font-san font-normal ml-1 rounded-lg  text-sm w-[262px]  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
               placeholder="Area Manager Name"
-            />
-          </p>
-          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
-            Issue Date :
-            <input
-              onChange={handleIssueDate}
-              value={issueDate}
-              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-              placeholder="Enter Isssue Date"
             />
           </p>
         </div>

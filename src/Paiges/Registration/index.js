@@ -83,7 +83,7 @@ const Registration = () => {
                 .then(() => {
                   setSuccess("");
                   setSuccess("Your Registration Is Complete");
-                  set(push(ref(db, "users/")), {
+                  set(ref(db, "users/" + auth.currentUser.uid), {
                     name: name,
                     email: email,
                     id: auth.currentUser.uid,
@@ -104,6 +104,10 @@ const Registration = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorMessage);
+          if (errorMessage.includes("auth/email-already-in-use")) {
+            setErr("This email already in use ! try another");
+            setLoader(false);
+          }
           // ..
         });
     }
@@ -125,12 +129,12 @@ const Registration = () => {
             <div className="flex justify-end">
               <div className="w-[472px] mt-12 flex flex-col gap-y-8">
                 {err && (
-                  <p className="font-san font-bold text-lg py-2 rounded-[10px] uppercase bg-green-400 text-white w-full text-center">
+                  <p className="font-san font-bold text-lg py-2 rounded-[10px] uppercase bg-red-400 text-white w-full text-center">
                     {err}
                   </p>
                 )}
                 {success && (
-                  <p className="font-san font-bold text-lg py-2 uppercase rounded-[10px]   bg-red-400 text-white w-full text-center">
+                  <p className="font-san font-bold text-lg py-2 uppercase rounded-[10px]   bg-green-400 text-white w-full text-center">
                     {success}
                   </p>
                 )}

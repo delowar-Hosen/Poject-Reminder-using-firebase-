@@ -24,6 +24,7 @@ import {
   remove,
 } from "firebase/database";
 import Search from "./Search";
+import DocumentReader from "./DocumentReader";
 
 const Settings = () => {
   const [user, setUser] = useState([]);
@@ -37,6 +38,7 @@ const Settings = () => {
   const [editNationalId, setEditNationalId] = useState(false);
   const [phoneEdit, setPhoneEdit] = useState(false);
   const [passwordEdit, setPasswordEdit] = useState(false);
+  const [download, setDownload] = useState(false);
   const [bg, setBg] = useState(false);
   const [email, setEmail] = useState("");
   const [resetP, setResetP] = useState("");
@@ -131,15 +133,15 @@ const Settings = () => {
       snapshot.forEach((item) => {
         arr.push({ ...item.val(), key: item.key });
       });
-      setBoxUsers(arr)
+      setBoxUsers(arr);
     });
   }, []);
 
   let handleEditSave = (item) => {
-    setClientNameEdit(false)
-    setClientFatherNameEdit(false)
-    setPhoneEdit(false)
-    
+    setClientNameEdit(false);
+    setClientFatherNameEdit(false);
+    setPhoneEdit(false);
+
     set(push(ref(db, "boxusers/")), {
       clientName: `${editName ? editName : item.clientName}`,
       fatherName: `${fNameEdit ? fNameEdit : item.fatherName}`,
@@ -153,7 +155,6 @@ const Settings = () => {
       editDate: new Date(),
     }).then(() => {
       remove(ref(db, "boxusers/" + item.key));
-      
     });
   };
 
@@ -162,76 +163,83 @@ const Settings = () => {
   };
 
   return (
-    <div className={`mt-[20px] ml-[43px] p-5 userSetings ${theme} `}>
-      <div className="flex  gap-x-10 mt-9">
-        <div className="w-1/2 p-6 border border-[#c9c5c542] rounded-md">
-          <h3 className="font-pop font-semibold text-xl mb-10">
-            Profile Settings
-          </h3>
-          {user.map((item) => (
-            <div className="flex pb-8 border-b border-[#8a84848e]">
-              <img
-                src={item.photoURL}
-                className="w-[100px] h-[100px]  rounded-full"
-              />
-              <div className="ml-8 mt-2">
-                {nameEdit ? (
-                  <div className="flex gap-x-1 items-center">
-                    <input
-                      placeholder="Edit Your Name"
-                      onChange={handleEditState}
-                      className="py-2 px-2 font-pop font-semibold text-[25px] outline-0 w-[70%]"
-                    />
-                    <AiTwotoneEdit
-                      onClick={() => handleSaveEditName(item)}
-                      className="text-[27px]  mr-9 "
-                    />
-                  </div>
-                ) : (
-                  <h5 className="font-pop font-semibold text-[25px] ">
-                    {item.name}
-                  </h5>
-                )}
-                <p className="font-pop font-normal text-xl ">{item.email}</p>
+    <div className="w-[90%] m-auto">
+      <div className="flex  gap-x-10 mt-4">
+        {download ? (
+          <div>
+            <DocumentReader click={() => setDownload(!download)} />
+          </div>
+        ) : (
+          <div className="w-1/2  border border-[#c9c5c542] rounded-md">
+            <h3 className="font-pop font-semibold text-xl mb-10">
+              Profile Settings
+            </h3>
+            {user.map((item) => (
+              <div className="flex pb-8 border-b border-[#8a84848e]">
+                <img
+                  src={item.photoURL}
+                  className="w-[100px] h-[100px]  rounded-full"
+                />
+                <div className="ml-8 mt-2">
+                  {nameEdit ? (
+                    <div className="flex gap-x-1 items-center">
+                      <input
+                        placeholder="Edit Your Name"
+                        onChange={handleEditState}
+                        className="py-2 px-2 font-pop font-semibold text-[25px] outline-0 w-[70%]"
+                      />
+                      <AiTwotoneEdit
+                        onClick={() => handleSaveEditName(item)}
+                        className="text-[27px]  mr-9 "
+                      />
+                    </div>
+                  ) : (
+                    <h5 className="font-pop font-semibold text-[25px] ">
+                      {item.name}
+                    </h5>
+                  )}
+                  <p className="font-pop font-normal text-xl ">{item.email}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
 
-          <div className="p-[43px] flex flex-col gap-y-8">
-            {nameEdit ? (
-              <span className="font-pop font-normal text-xl text-[#df4a4a]">
-                Please Edit Your User Name
-              </span>
-            ) : (
-              <p
-                onClick={handleNameEdit}
-                className="flex items-center cursor-pointer"
-              >
-                <AiTwotoneEdit className="text-[27px] mr-9 " />
-                <span className="font-pop font-normal text-xl">
-                  Edit Profile Name.
+            <div className="p-[43px] flex flex-col gap-y-8">
+              {nameEdit ? (
+                <span className="font-pop font-normal text-xl text-[#df4a4a]">
+                  Please Edit Your User Name
+                </span>
+              ) : (
+                <p
+                  onClick={handleNameEdit}
+                  className="flex items-center cursor-pointer"
+                >
+                  <AiTwotoneEdit className="text-[27px] mr-9 " />
+                  <span className="font-pop font-normal text-xl">
+                    Edit Profile Name.
+                  </span>
+                </p>
+              )}
+
+              <p className="flex items-center cursor-pointer">
+                <BsChatDotsFill className="text-[27px] mr-9 " />
+                <span
+                  onClick={() => setDownload(!download)}
+                  className="font-pop font-normal text-xl"
+                >
+                  Store Your Document
                 </span>
               </p>
-            )}
-
-            <p className="flex items-center">
-              <BsChatDotsFill className="text-[27px] mr-9 " />
-              <span className="font-pop font-normal text-xl">
-                Edit Profile Status Info.
-              </span>
-            </p>
-            <p className="flex items-center">
-              <IoIosPhotos className="text-[27px] mr-9 " />
-              <span className="font-pop font-normal text-xl">
-                Edit Profile Photo.
-              </span>
-            </p>
-            <p className="flex items-center">
-              <IoHelpCircleOutline className="text-[27px] mr-9 " />
-              <span className="font-pop font-normal text-xl">Help.</span>
-            </p>
+              <p className="flex items-center cursor-pointer">
+                <IoIosPhotos className="text-[27px] mr-9 " />
+                <span className="font-pop font-normal text-xl">Reset</span>
+              </p>
+              <p className="flex items-center cursor-pointer">
+                <IoHelpCircleOutline className="text-[27px] mr-9 " />
+                <span className="font-pop font-normal text-xl">Hard Reset</span>
+              </p>
+            </div>
           </div>
-        </div>
+        )}
         <div className="w-1/2  p-6 border border-[#c9c5c542] rounded-md">
           <div>
             <h3 className="font-pop font-semibold  text-xl mb-5">

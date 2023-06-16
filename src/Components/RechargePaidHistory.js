@@ -159,84 +159,85 @@ const RechargePaidHistory = () => {
   };
 
   return (
-    <div className=" p-5 mt-10">
+    <div className="w-[90%] m-auto">
       {addRecharge ? (
-        <div className="w-full relative ">
-          <h2 className="font-san text-center  font-bold text-5xl ">
+        <div className="w-full relative mt-4 ">
+          <h2 className="font-san text-center  font-bold text-2xl ">
             ADD PAID LIST
           </h2>
           <button
             onClick={() => setAddRecharge(!addRecharge)}
-            className="font-san py-3 px-3 absolute top-0 right-[165px]  bg-black text-white rounded-md font-bold text-lg uppercase text-right"
+            className="font-san py-3 px-3 absolute top-0 right-0  bg-black text-white rounded-md font-bold text-base uppercase text-right"
           >
             Cancel
           </button>
         </div>
       ) : (
         <div>
-          <div className="w-full relative ">
-            <h2 className="font-san text-center  font-bold text-5xl ">
+          <div className="w-full relative mt-4 ">
+            <h2 className="font-san text-center  font-bold text-2xl ">
               RECHARGE PAID HISTORY
             </h2>
             <button
               onClick={() => setAddRecharge(!addRecharge)}
-              className="font-san py-3 px-3 absolute top-0 right-[165px]  bg-black text-white rounded-md font-bold text-lg uppercase text-right"
+              className="font-san py-3 px-3 absolute top-0 right-0  bg-black text-white rounded-md font-bold text-base uppercase text-right"
             >
               Go To Recharge List
             </button>
           </div>
-          <div className="mt-8 flex">
-            <p className="font-san font-bold text-lg  border border-solid flex justify-center items-center  w-[80px] py-3">
+          <div className="flex mt-8">
+            <p className="font-san font-semibold text-base  border border-solid flex justify-center items-center  w-[70px] py-3">
               Serial{" "}
             </p>
-            <p className="font-san font-bold text-lg  border border-solid py-3 flex justify-center items-center  w-[400px]">
-              User Name{" "}
+            <p className="font-san font-semibold text-base  border border-solid py-3 flex justify-center items-center  w-[300px]">
+              Member Name{" "}
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[175px]">
+            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[175px]">
               STB ID Number{" "}
             </p>
-            <p className="font-san font-bold text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
+            <p className="font-san font-semibold text-base flex items-center justify-center border border-solid py-3  w-[150px]">
               Paid By{" "}
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[130px]">
+            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[130px]">
               Paid Date{" "}
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[110px]">
+            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[110px]">
               Paid Taka{" "}
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[200px]">
+            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[200px]">
               Recharge Start Date
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[200px]">
+            <button className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[200px]">
               Recharge End Date
-            </p>
+            </button>
           </div>
+
           {paidHistory.map((item, index) => (
-            <div className="flex">
-              <p className="font-san font-normal text-base  border border-solid flex justify-center items-center  w-[80px] py-3">
+            <div key={index} className="flex">
+              <p className="font-san font-normal text-sm  border border-solid flex justify-center items-center  w-[70px] py-3">
                 {index + 1}
               </p>
-              <p className="font-san font-normal text-base  border border-solid py-3 flex justify-center items-center  w-[400px]">
+              <p className="font-san  font-normal text-sm  border border-solid py-3 flex justify-center items-center  w-[300px]">
                 {item.clientName}
               </p>
-              <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[175px]">
+              <p className="font-san  font-normal text-sm flex justify-center items-center border border-solid py-3  w-[175px]">
                 {item.boxId}
               </p>
-              <p className="font-san font-normal text-base flex items-center justify-center border border-solid py-3  w-[150px]">
+              <p className="font-san  font-normal text-sm flex items-center justify-center border border-solid py-3  w-[150px]">
                 {item.paidBy}
               </p>
-              <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[130px]">
+              <p className="font-san  font-normal text-sm flex justify-center items-center border border-solid py-3  w-[130px]">
                 {item.paidDate}
               </p>
-              <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[110px]">
+              <p className="font-san  font-normal text-sm flex justify-center items-center border border-solid py-3  w-[110px]">
                 {item.paidBill}
               </p>
-              <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[200px]">
+              <p className="font-san  font-normal text-sm flex justify-center items-center border border-solid py-3  w-[200px]">
                 {item.RechargeStartDate}
               </p>
-              <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[200px]">
+              <button className="font-san  font-normal text-sm flex justify-center items-center border border-solid py-3  w-[200px]">
                 {item.RechargeEndDate}
-              </p>
+              </button>
             </div>
           ))}
         </div>
@@ -245,89 +246,92 @@ const RechargePaidHistory = () => {
       {addRecharge && (
         <div>
           <Search state={handleSearch} />
-
-          <div className="mt-2 flex">
-            <p className="font-san font-bold text-lg  border border-solid flex justify-center items-center  w-[80px] py-3">
+          <div className="flex w-[98.6%]">
+            <p className="font-san font-semibold text-base  border border-solid flex justify-center items-center  w-[70px] py-3">
               Serial{" "}
             </p>
-            <p className="font-san font-bold text-lg  border border-solid py-3 flex justify-center items-center  w-[400px]">
-              User Name{" "}
+            <p className="font-san font-semibold text-base  border border-solid py-3 flex justify-center items-center  w-[300px]">
+              Member Name{" "}
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[175px]">
+            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[175px]">
               STB ID Number{" "}
             </p>
-            <p className="font-san font-bold text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
+            <p className="font-san font-semibold text-base flex items-center justify-center border border-solid py-3  w-[150px]">
               Area Name{" "}
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
+            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[180px]">
               Recharge Start Date
             </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
+            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[160px]">
               Recharge End Date
             </p>
-            <button className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]">
-              Add Paid List
-            </button>
+            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[100px]">
+              Action
+            </p>
           </div>
-          {search.length > 0
-            ? search.map((item, index) => (
-                <div className=" flex">
-                  <p className="font-san font-normal text-lg  border border-solid flex justify-center items-center  w-[80px] py-3">
-                    {index + 1}
-                  </p>
-                  <p className="font-san font-normal text-lg  border border-solid py-3 flex justify-center items-center  w-[400px]">
-                    {item.clientName}
-                  </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[175px]">
-                    {item.boxId}
-                  </p>
-                  <p className="font-san font-normal text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
-                    {item.areaname}
-                  </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
-                    {item.issueDate}
-                  </p>
-
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
-                    {item.phone}
-                  </p>
-                  <button
-                    onClick={() => handlePaid(item)}
-                    className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]"
-                  >
-                    Paid
-                  </button>
-                </div>
-              ))
-            : rechargeList.map((item, index) => (
-                <div className=" flex">
-                  <p className="font-san font-normal text-lg  border border-solid flex justify-center items-center  w-[80px] py-3">
-                    {index + 1}
-                  </p>
-                  <p className="font-san font-normal text-lg  border border-solid py-3 flex justify-center items-center  w-[400px]">
-                    {item.clientName}
-                  </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[175px]">
-                    {item.boxId}
-                  </p>
-                  <p className="font-san font-normal text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
-                    {item.areaname}
-                  </p>
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
-                    {item.issueDate}
-                  </p>
-
-                  <p className="font-san font-normal text-lg flex justify-center items-center border border-solid py-3  w-[210px]">
-                    {item.phone}
-                  </p>
-                  <button
-                    onClick={() => handlePaid(item)}
-                    className="font-san font-semibold ml-[10px] text-base  flex justify-center items-center border border-solid py-3 bg-black text-white  w-[200px]"
-                  >
-                    Paid
-                  </button>
-                </div>
-              ))}
+          <div className="w-full h-[53vh] overflow-y-scroll">
+            {search.length > 0
+              ? search.map((item, index) => (
+                  <div key={index} className="flex ">
+                    <p className="font-san font-normal text-sm  border border-solid flex justify-center items-center  w-[70px] py-3">
+                      {index + 1}
+                    </p>
+                    <p className="font-san font-normal text-sm  border border-solid py-3 flex justify-center items-center  w-[300px]">
+                      {item.clientName}
+                    </p>
+                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[175px]">
+                      {item.boxId}
+                    </p>
+                    <p className="font-san font-normal text-sm flex items-center justify-center border border-solid py-3  w-[150px]">
+                      {item.areaname}
+                    </p>
+                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[180px]">
+                    {item.RechargeStartDate}
+                    </p>
+                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[160px]">
+                    {item.RechargeEndDate}
+                    </p>
+                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3 bg-[#634747]  w-[100px]">
+                      <button
+                        onClick={() => handlePaid(item)}
+                        className="font-san font-normal text-sm  flex justify-center items-center border border-solid py-3  text-white"
+                      >
+                        Paid
+                      </button>
+                    </p>
+                  </div>
+                ))
+              : rechargeList.map((item, index) => (
+                  <div key={index} className="flex">
+                    <p className="font-san font-normal text-sm  border border-solid flex justify-center items-center  w-[70px] py-3">
+                      {index + 1}
+                    </p>
+                    <p className="font-san font-normal text-sm  border border-solid py-3 flex justify-center items-center  w-[300px]">
+                      {item.clientName}
+                    </p>
+                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[175px]">
+                      {item.boxId}
+                    </p>
+                    <p className="font-san font-normal text-sm flex items-center justify-center border border-solid py-3  w-[150px]">
+                      {item.areaname}
+                    </p>
+                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[180px]">
+                    {item.RechargeStartDate}
+                    </p>
+                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[160px]">
+                    {item.RechargeEndDate}
+                    </p>
+                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  bg-[#634747]  w-[100px]">
+                      <button
+                        onClick={() => handlePaid(item)}
+                        className="font-san font-normal text-sm  flex justify-center items-center py-3  text-white"
+                      >
+                        Paid
+                      </button>
+                    </p>
+                  </div>
+                ))}
+          </div>
         </div>
       )}
       {paidPage && (

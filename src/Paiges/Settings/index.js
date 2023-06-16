@@ -6,6 +6,7 @@ import Rechargelist from "../../Components/Rechargelist";
 import Rechargereminder from "../../Components/Rechargereminder";
 import Sidebar from "../../Components/Sidebar";
 import Settings from "../../Components/Settings";
+import DocumentReader from "../../Components/DocumentReader";
 
 const Setting = () => {
   const [varify, setVarify] = useState(false);

@@ -9,6 +9,7 @@ import Message from "./Paiges/Message";
 import RCHList from "./Paiges/RechargeList";
 import Registration from "./Paiges/Registration";
 import Setting from "./Paiges/Settings";
+import DocumentReader from "./Components/DocumentReader";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Route path="/rechargelist" element={<RCHList />} />
       <Route path="/details" element={<Details />} />
       <Route path="/settings" element={<Setting />} />
+      <Route path="/download" element={<DocumentReader />} />
     </Routes>
   );
 }

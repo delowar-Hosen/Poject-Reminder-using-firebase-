@@ -38,10 +38,6 @@ const RCHList = () => {
               <Rechargelist />
             </div>
           </div>
-          {/* <Details /> */}
-          {/* <Addbox /> */}
-          {/* <Rechargereminder /> */}
-          {/* <Rechargelist /> */}
         </div>
       )}
     </div>

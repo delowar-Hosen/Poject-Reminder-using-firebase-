@@ -119,7 +119,7 @@ const Navbar = () => {
                   <AiOutlinePlus className="ml-2 border border-solid text-2xl p-1" />
                 </li>
               ) : (
-                areas.map((item) => <li> {item.areaName}</li>)
+                areas.map((item,index) => <li key={index}> {item.areaName}</li>)
               )}
               {areas.length < 5 ? (
                 <li onClick={handleArea} className=" flex items-center">

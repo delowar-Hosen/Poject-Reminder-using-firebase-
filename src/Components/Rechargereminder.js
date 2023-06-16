@@ -29,36 +29,37 @@ const Rechargereminder = () => {
   }, []);
 
   return (
-    <div className=" p-5 mt-10">
-      <div className="w-full text-center">
-        <h2 className="font-san font-bold text-5xl ">Recharge Reminder</h2>
+    <div className=" w-[90%] m-auto mt-10">
+      <div className=" text-center">
+        <h2 className="font-san font-bold text-2xl ">Recharge Reminder</h2>
       </div>
-      <div className="mt-8 flex">
-        <p className="font-san font-bold text-lg  border border-solid flex justify-center items-center  w-[80px] py-3">
+      <div className="flex mt-2">
+        <p className="font-san font-semibold text-base  border border-solid flex justify-center items-center  w-[70px] py-3">
           Serial{" "}
         </p>
-        <p className="font-san font-bold text-lg  border border-solid py-3 flex justify-center items-center  w-[400px]">
-          User Name{" "}
+        <p className="font-san font-semibold text-base  border border-solid py-3 flex justify-center items-center  w-[300px]">
+          Member Name{" "}
         </p>
-        <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[175px]">
+        <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[175px]">
           STB ID Number{" "}
         </p>
-        <p className="font-san font-bold text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
+        <p className="font-san font-semibold text-base flex items-center justify-center border border-solid py-3  w-[150px]">
           Area Name{" "}
         </p>
-        <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[130px]">
+        <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[130px]">
           Issue Date{" "}
         </p>
-        <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[110px]">
+        <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[110px]">
           Status{" "}
         </p>
-        <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[200px]">
+        <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[200px]">
           Recharge End Date{" "}
         </p>
-        <button className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[200px]">
-          STB Recharge
+        <button className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[200px]">
+          Recharge
         </button>
       </div>
+
       {alertRechargeList.length <= 0 ? (
         <div className="w-full text-center bg-green-500 p-3 ">
           <h2 className="font-san font-normal text-Base text-white ">
@@ -68,10 +69,10 @@ const Rechargereminder = () => {
       ) : (
         alertRechargeList.map((item, index) => (
           <div className="flex">
-            <p className="font-san font-normal text-base  border border-solid flex justify-center items-center  w-[80px] py-3">
+            <p className="font-san font-normal text-base  border border-solid flex justify-center items-center  w-[70px] py-3">
               {index + 1}
             </p>
-            <p className="font-san font-normal text-base  border border-solid py-3 flex justify-center items-center  w-[400px]">
+            <p className="font-san font-normal text-base  border border-solid py-3 flex justify-center items-center  w-[300px]">
               {item.clientName}
             </p>
             <p className="font-san font-normal text-base flex justify-center items-center border border-solid py-3  w-[175px]">

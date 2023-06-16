@@ -10,6 +10,8 @@ import Settings from "../../Components/Settings";
 import Sidebar from "../../Components/Sidebar";
 import Userlist from "../../Components/Userlist";
 import { getDatabase, ref, onValue } from "firebase/database";
+import PdfDownloadButton from "../../Components/DocumentReader";
+import DocumentReader from "../../Components/DocumentReader";
 
 const Home = () => {
   const [varify, setVarify] = useState(false);
@@ -38,17 +40,13 @@ const Home = () => {
             <Navbar />
           </div>
           <div className="flex">
-            <div className="w-[10%]">
+            <div className="w-[15%]">
               <Sidebar active="home" />
             </div>
-            <div className="w-[90%]">
+            <div className="w-[85%]">
               <Userlist />
             </div>
           </div>
-          {/* <Details /> */}
-          {/* <Addbox /> */}
-          {/* <Rechargereminder /> */}
-          {/* <Rechargelist /> */}
         </div>
       )}
     </>

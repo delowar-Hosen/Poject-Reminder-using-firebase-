@@ -37,10 +37,6 @@ const Message = () => {
               <RechargePaidHistory />
             </div>
           </div>
-          {/* <Details /> */}
-          {/* <Addbox /> */}
-          {/* <Rechargereminder /> */}
-          {/* <Rechargelist /> */}
         </div>
       )}
     </div>

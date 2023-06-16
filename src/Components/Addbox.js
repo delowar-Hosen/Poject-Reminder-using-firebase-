@@ -154,132 +154,129 @@ const Addbox = () => {
 
   return (
     <div className="p-5 w-[90%] m-auto">
-      <h2 className="font-san font-bold text-5xl text-black text-center">
+      <h2 className="font-san font-bold text-2xl text-black text-center">
         User Information
       </h2>
       <div>
         {err && (
-          <p className="font-san font-bold text-lg py-2 rounded-[10px] uppercase bg-red-400 text-white w-full text-center">
+          <p className="font-san font-semibold text-sm py-2 rounded-[10px] uppercase bg-red-400 text-white w-full text-center">
             {err}
           </p>
         )}
         {success && (
-          <p className="font-san font-bold text-lg py-2 uppercase rounded-[10px]   bg-green-400 text-white w-full text-center">
+          <p className="font-san font-semibold text-sm py-2 uppercase rounded-[10px]   bg-green-400 text-white w-full text-center">
             {success}
           </p>
         )}
       </div>
-      <div className="flex justify-between mt-20 ">
-        <p className="font-san font-bold text-lg uppercase ">
-          Client Name :
-          <input
-            onChange={handleClientName}
-            value={cName}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Client Name"
-          />
-        </p>
-        <p className="font-san font-bold text-lg uppercase">
-          Client Father/Husband Name :
-          <input
-            onChange={handleFaterName}
-            value={fName}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Client Father/Husband Name"
-          />
-        </p>
-      </div>
-      <div className="flex justify-between mt-8">
-        <p className="font-san font-bold text-lg uppercase">
-          Client Phone Number :
-          <input
-            onChange={handlePhone}
-            value={phone}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Client Phone Number"
-          />
-        </p>
+      <div className="flex">
+        <div className="w-1/2">
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Client Name :
+            <input
+              onChange={handleClientName}
+              value={cName}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Client Name"
+            />
+          </p>
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Client Father/Husband Name :
+            <input
+              onChange={handleFaterName}
+              value={fName}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Father/Husband Name"
+            />
+          </p>
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Client Phone Number :
+            <input
+              onChange={handlePhone}
+              value={phone}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Enter Client Phone Number"
+            />
+          </p>
 
-        <p className="font-san font-bold text-lg uppercase">
-          Client Area Name :{" "}
-          <select
-            onChange={handleArea}
-            id="countries"
-            class="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-          >
-            <option selected>Choose a Area</option>
-            <option value="Bisra Kandi">Bisra Kandi</option>
-            <option value="Uttar Kulaura">Uttar Kulaura</option>
-            <option value="Hid Road">Hid Road</option>
-            <option value="Dakirpur">DakirPur</option>
-            <option value="Joi Chondi">JoiChondi</option>
-          </select>
-        </p>
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Client Area Name :{" "}
+            <select
+              onChange={handleArea}
+              id="countries"
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+            >
+              <option selected>Choose a Area</option>
+              <option value="Bisra Kandi">Bisra Kandi</option>
+              <option value="Uttar Kulaura">Uttar Kulaura</option>
+              <option value="Hid Road">Hid Road</option>
+              <option value="Dakirpur">DakirPur</option>
+              <option value="Joi Chondi">JoiChondi</option>
+            </select>
+          </p>
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Client National Id Number :
+            <input
+              onChange={handleId}
+              value={iD}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Enter Client National Id Number"
+            />
+          </p>
+        </div>
+        <div className="w-1/2">
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Box Id Number :
+            <input
+              onChange={handleBoxId}
+              value={boxId}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Enter Box Id Number"
+            />
+          </p>
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Box Price :
+            <input
+              onChange={handlePrice}
+              value={price}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Enter Client National Id Number"
+            />
+          </p>
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Monthly Bill :
+            <input
+              onChange={handleBill}
+              value={bill}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Enter Monthly Bill"
+            />
+          </p>
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4">
+            Area Manager Name :
+            <input
+              onChange={handleAreaManagerName}
+              value={mName}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Area Manager Name"
+            />
+          </p>
+          <p className="font-san flex items-center font-semibold text-sm uppercase mt-4 ">
+            Issue Date :
+            <input
+              onChange={handleIssueDate}
+              value={issueDate}
+              className="font-san font-normal ml-1 rounded-lg  text-sm  px-12 py-2   uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
+              placeholder="Enter Isssue Date"
+            />
+          </p>
+        </div>
       </div>
-      <div className="flex justify-between mt-8">
-        <p className="font-san font-bold text-lg uppercase">
-          Client National Id Number :
-          <input
-            onChange={handleId}
-            value={iD}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Client National Id Number"
-          />
-        </p>
-        <p className="font-san font-bold text-lg uppercase">
-          Box Id Number :
-          <input
-            onChange={handleBoxId}
-            value={boxId}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Box Id Number"
-          />
-        </p>
-      </div>
-      <div className="flex justify-between mt-8">
-        <p className="font-san font-bold text-lg uppercase">
-          Box Price :
-          <input
-            onChange={handlePrice}
-            value={price}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Client National Id Number"
-          />
-        </p>
-        <p className="font-san font-bold text-lg uppercase">
-          Monthly Bill :
-          <input
-            onChange={handleBill}
-            value={bill}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Monthly Bill"
-          />
-        </p>
-      </div>
-      <div className="flex justify-between mt-8">
-        <p className="font-san font-bold text-lg uppercase">
-          Area Manager Name :
-          <input
-            onChange={handleAreaManagerName}
-            value={mName}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Area Manager Name"
-          />
-        </p>
-        <p className="font-san font-bold text-lg uppercase">
-          Issue Date :
-          <input
-            onChange={handleIssueDate}
-            value={issueDate}
-            className="font-san font-semibold ml-3 text-lg py-3 px-2  w-[400px] uppercase  placeholder:text-center placeholder:font-san placeholder:font-medium placeholder:text-base border border-solid "
-            placeholder="Enter Isssue Date"
-          />
-        </p>
-      </div>
+
       <div className="text-center mt-10">
         <button
           onClick={handleSubmit}
-          className="font-san font-bold text-lg py-3 px-4 rounded-lg bg-black text-white uppercase"
+          className="font-san font-bold text-lg py-3 px-4 rounded-lg bg-[#634747] text-white uppercase"
         >
           Submit Information
         </button>

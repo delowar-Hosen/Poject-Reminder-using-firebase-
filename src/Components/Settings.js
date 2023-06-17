@@ -5,6 +5,7 @@ import {
   AiFillDelete,
   AiFillSave,
   AiOutlineCloudUpload,
+  AiOutlineDownload
 } from "react-icons/ai";
 import {
   BsChatDotsFill,
@@ -12,11 +13,9 @@ import {
   BsFillSunFill,
   BsFillSimFill,
 } from "react-icons/bs";
-
-import { IoIosPhotos, IoIosContrast } from "react-icons/io";
-import { IoHelpCircleOutline } from "react-icons/io5";
+import { GrPowerReset } from "react-icons/gr";
 import { FaUserEdit, FaCreditCard } from "react-icons/fa";
-import { MdOutlineCancelPresentation } from "react-icons/md";
+import { MdOutlineCancelPresentation,MdRestore } from "react-icons/md";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getAuth, sendPasswordResetEmail, deleteUser } from "firebase/auth";
@@ -203,7 +202,7 @@ const Settings = () => {
             <DocumentReader click={() => setDownload(!download)} />
           </div>
         ) : (
-          <div className="w-1/2  border border-[#c9c5c542] rounded-md">
+          <div className="w-1/2  border border-[#c9c5c542] p-5 rounded-md">
             <h3 className="font-pop font-semibold text-xl mb-10">
               Profile Settings
             </h3>
@@ -232,7 +231,7 @@ const Settings = () => {
                       />
                       <AiTwotoneEdit
                         onClick={() => handleSaveEditName(item)}
-                        className="text-[27px]  mr-9 "
+                        className="text-[27px]  mr-9 cursor-pointer"
                       />
                     </div>
                   ) : (
@@ -263,7 +262,7 @@ const Settings = () => {
               )}
 
               <p className="flex items-center cursor-pointer">
-                <BsChatDotsFill className="text-[27px] mr-9 " />
+                <AiOutlineDownload className="text-[27px] mr-9 " />
                 <span
                   onClick={() => setDownload(!download)}
                   className="font-pop font-normal text-xl"
@@ -275,14 +274,14 @@ const Settings = () => {
                 onClick={handleReset}
                 className="flex items-center cursor-pointer"
               >
-                <IoIosPhotos className="text-[27px] mr-9 " />
+                <GrPowerReset className="text-[27px] mr-9 " />
                 <span className="font-pop font-normal text-xl">Reset</span>
               </p>
               <p
                 onClick={handleHardReset}
                 className="flex items-center cursor-pointer"
               >
-                <IoHelpCircleOutline className="text-[27px] mr-9 " />
+                <MdRestore className="text-[27px] mr-9 " />
                 <span className="font-pop font-normal text-xl">Hard Reset</span>
               </p>
             </div>

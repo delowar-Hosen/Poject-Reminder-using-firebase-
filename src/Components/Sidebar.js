@@ -13,7 +13,7 @@ const Sidebar = ({ active }) => {
   const navigate = useNavigate();
 
   return (
-    <div className=" w-40 bg-[#634747] flex flex-col  gap-y-12 items-center justify-center py-10">
+    <div className=" w-40 bg-[#1e2833] flex flex-col  gap-y-12 items-center justify-center py-10">
       <div
         className={`${
           active == "home" &&

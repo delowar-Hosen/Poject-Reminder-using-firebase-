@@ -112,7 +112,7 @@ const Rechargelist = () => {
               Add Recharge List
             </button>
           </div>
-          <div className="flex mt-4 w-[98.6%]">
+          <div className="flex mt-12 w-[98.6%]">
             <p className="font-san font-semibold text-base  border border-solid flex justify-center items-center  w-[70px] py-3">
               Serial{" "}
             </p>

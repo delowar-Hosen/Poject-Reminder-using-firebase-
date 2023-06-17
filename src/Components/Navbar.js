@@ -83,7 +83,7 @@ const Navbar = () => {
     });
   }, []);
   return (
-    <div className="border-b-2  border-solid">
+    <div className="border-b-2  bg-[#868e96]  border-solid">
       <Container>
         <div
           className="flex items-center justify-between py-6 
@@ -103,10 +103,10 @@ const Navbar = () => {
               </div>
 
               <div className=" ml-3">
-                <h2 className="font-san font-bold  text-lg text-black">
+                <h2 className="font-san font-bold  text-lg   text-white">
                   {item.name}
                 </h2>
-                <p className="font-san font-normal  text-sm text-black">
+                <p className="font-san font-normal  text-sm   text-white">
                   Area Manager
                 </p>
               </div>
@@ -114,7 +114,7 @@ const Navbar = () => {
           ))}
 
           <div>
-            <ul className="font-san  font-bold cursor-pointer items-center text-base text-black flex  gap-x-6">
+            <ul className="font-san  font-bold cursor-pointer items-center text-base  text-white flex  gap-x-6">
               {areas.length < 0 ? (
                 <li onClick={handleArea} className=" flex items-center">
                   Add Your SubArea
@@ -138,10 +138,10 @@ const Navbar = () => {
             onClick={handleLogOut}
             className="flex  items-center cursor-pointer"
           >
-            <p className="font-san font-semibold text-base text-black mr-3">
+            <p className="font-san font-semibold text-base  text-white mr-3">
               LogOut
             </p>
-            <div className="border border-black  rounded-full w-10 h-10 flex items-center justify-center">
+            <div className="border border-white  rounded-full w-10 h-10 flex items-center justify-center">
               <AiOutlineLogout className="text-lg text-red-600" />
             </div>
           </div>

@@ -9,6 +9,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { getDatabase, ref, set, push } from "firebase/database";
+import { Helmet } from "react-helmet";
 
 const Registration = () => {
   const [name, setName] = useState("");
@@ -115,19 +116,31 @@ const Registration = () => {
 
   return (
     <div className=" mt-8">
+      <Helmet>
+        <title>Registration</title>
+      </Helmet>
       <Container>
-        <div className="flex justify-center  w-full">
-          <div className="flex justify-center  items-center">
+        <div className="flex justify-center items-center  w-full h-screen">
+          <div className="flex  justify-center items-center w-1/2 ">
             <picture>
-              <img src="assests/images/regi.png" />
+              <img
+                className="w-[400px] h-[400px]"
+                src="assests/images/regi.png"
+              />
             </picture>
           </div>
-          <div>
-            <h1 className="font-san font-bold text-right   text-[40px] text-black">
-              Share your mangement with REMINDER
-            </h1>
-            <div className="flex justify-end">
-              <div className="w-[472px] mt-12 flex flex-col gap-y-8">
+          <div className="w-1/2">
+            <div className="  flex">
+              <h1 className="w-[400px]  rounded-[30px]  font-san capitalize pr-5 font-bold text-center bg-[#1e2833]  text-lg   text-white">
+                Reminder
+              </h1>
+            </div>
+
+            <div className="flex">
+              <div className="w-[400px] bg-[#1e2833] p-5 rounded-md mt-5 flex flex-col gap-y-3">
+                <p className="text-center text-white text-lg font-san font-semibold">
+                  Register Here !
+                </p>
                 {err && (
                   <p className="font-san font-bold text-lg py-2 rounded-[10px] uppercase bg-red-400 text-white w-full text-center">
                     {err}
@@ -143,28 +156,28 @@ const Registration = () => {
                   value={email}
                   type="email"
                   placeholder="Your Email"
-                  className="w-full font-san font-bold placeholder:uppercase text-sm py-[22px] px-[30px] rounded-[10px] border"
+                  className="w-full font-san flex justify-center font-semibold placeholder:text-white  placeholder:text-center placeholder:capitalize  text-sm bg-[#1e2833] py-[10px] text-white px-[30px] rounded-[30px] border"
                 />
                 <input
                   onChange={handleName}
                   type="text"
                   value={name}
                   placeholder="Enter Full Name"
-                  className="w-full font-san font-bold placeholder:uppercase text-sm py-[22px] px-[30px] rounded-[10px] border"
+                  className="w-full font-san flex justify-center font-semibold placeholder:text-white  placeholder:text-center placeholder:capitalize  text-sm bg-[#1e2833] py-[10px] text-white px-[30px] rounded-[30px] border"
                 />
                 <input
                   onChange={handlePassword}
                   type="password"
                   value={password}
                   placeholder="Enter your password"
-                  className="w-full font-san font-bold placeholder:uppercase text-sm py-[22px] px-[30px] rounded-[10px] border"
+                  className="w-full font-san flex justify-center font-semibold placeholder:text-white  placeholder:text-center placeholder:capitalize  text-sm bg-[#1e2833] py-[10px] text-white px-[30px] rounded-[30px] border"
                 />
                 <input
                   onChange={handleCPassword}
                   value={cPassword}
                   type="password"
                   placeholder="Confirm your password"
-                  className="w-full mb-8 font-san font-bold placeholder:uppercase text-sm py-[22px] px-[30px] rounded-[10px] border"
+                  className="w-full font-san flex justify-center font-semibold placeholder:text-white  placeholder:text-center placeholder:capitalize  text-sm bg-[#1e2833] py-[10px] text-white px-[30px] rounded-[30px] border"
                 />
                 {loader ? (
                   <div className="w-full  flex justify-center items-center border border-solid rounded-[5px] ">
@@ -182,15 +195,19 @@ const Registration = () => {
                 ) : (
                   <button
                     onClick={handleSubmit}
-                    className="font-san font-bold text-white bg-black rounded-[5px] text-[28px] py-[14px] text-center"
+                    className="w-full font-san flex justify-center font-bold  text-sm bg-[#9b9ea1] py-[10px] mt-6 text-white uppercase px-[30px] rounded-[30px] border"
                   >
-                    SIGN UP
+                    Submit
                   </button>
                 )}
 
                 <div className="text-center">
-                  <h3 className="font-san  font-medium text-base text-black uppercase">
-                    Already Have An Account!<Link to="/login"> Login</Link>{" "}
+                  <h3 className="w-full mt-12 font-san flex justify-center font-semibold placeholder:text-white  placeholder:text-center placeholder:capitalize  text-sm bg-[#1e2833] py-[10px] text-white px-[30px] rounded-[30px] border">
+                    Already Have An Account !{" "}
+                    <Link className="ml-2" to="/login">
+                      {" "}
+                      Login
+                    </Link>{" "}
                   </h3>
                 </div>
               </div>

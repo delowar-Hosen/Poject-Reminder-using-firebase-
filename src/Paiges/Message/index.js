@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import RechargePaidHistory from "../../Components/RechargePaidHistory";
 import Sidebar from "../../Components/Sidebar";
+import { Helmet } from "react-helmet";
 
 const Message = () => {
   const [varify, setVarify] = useState(false);
@@ -26,6 +27,9 @@ const Message = () => {
     <div>
       {varify && (
         <div>
+           <Helmet>
+            <title>Reminder</title>
+          </Helmet>
           <div className="w-full">
             <Navbar />
           </div>

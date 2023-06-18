@@ -12,6 +12,7 @@ import Userlist from "../../Components/Userlist";
 import { getDatabase, ref, onValue } from "firebase/database";
 import PdfDownloadButton from "../../Components/DocumentReader";
 import DocumentReader from "../../Components/DocumentReader";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const [varify, setVarify] = useState(false);
@@ -36,6 +37,9 @@ const Home = () => {
     <>
       {varify && (
         <div>
+          <Helmet>
+            <title>Reminder</title>
+          </Helmet>
           <div className="w-full">
             <Navbar />
           </div>

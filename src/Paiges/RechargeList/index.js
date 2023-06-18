@@ -5,6 +5,7 @@ import Navbar from "../../Components/Navbar";
 import Rechargelist from "../../Components/Rechargelist";
 import Rechargereminder from "../../Components/Rechargereminder";
 import Sidebar from "../../Components/Sidebar";
+import { Helmet } from "react-helmet";
 
 const RCHList = () => {
   const [varify, setVarify] = useState(false);
@@ -27,6 +28,9 @@ const RCHList = () => {
     <div>
       {varify && (
         <div>
+            <Helmet>
+            <title>Reminder</title>
+          </Helmet>
           <div className="w-full">
             <Navbar />
           </div>

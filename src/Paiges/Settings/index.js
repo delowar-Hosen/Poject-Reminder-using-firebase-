@@ -7,6 +7,7 @@ import Rechargereminder from "../../Components/Rechargereminder";
 import Sidebar from "../../Components/Sidebar";
 import Settings from "../../Components/Settings";
 import DocumentReader from "../../Components/DocumentReader";
+import { Helmet } from "react-helmet";
 
 const Setting = () => {
   const [varify, setVarify] = useState(false);
@@ -30,6 +31,9 @@ const Setting = () => {
     <div>
       {varify && (
         <div>
+            <Helmet>
+            <title>Reminder</title>
+          </Helmet>
           <div className="w-full">
             <Navbar />
           </div>

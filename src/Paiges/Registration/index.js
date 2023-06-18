@@ -115,7 +115,7 @@ const Registration = () => {
   };
 
   return (
-    <div className=" mt-8">
+    <div>
       <Helmet>
         <title>Registration</title>
       </Helmet>
@@ -130,6 +130,18 @@ const Registration = () => {
             </picture>
           </div>
           <div className="w-1/2">
+            <div className="w-[400px] mb-4">
+              {err && (
+                <p className="font-san font-bold text-sm py-1 rounded-[30px]  capitalize border-b border-solid border-[#1e2833] bg-red-400 text-white w-full text-center">
+                  {err}
+                </p>
+              )}
+              {success && (
+                <p className="font-san font-bold text-sm py-1  capitalize rounded-[30px] border-b border-solid border-[#1e2833]   bg-green-400 text-white w-full text-center">
+                  {success}
+                </p>
+              )}
+            </div>
             <div className="  flex">
               <h1 className="w-[400px]  rounded-[30px]  font-san capitalize pr-5 font-bold text-center bg-[#1e2833]  text-lg   text-white">
                 Reminder
@@ -141,16 +153,7 @@ const Registration = () => {
                 <p className="text-center text-white text-lg font-san font-semibold">
                   Register Here !
                 </p>
-                {err && (
-                  <p className="font-san font-bold text-lg py-2 rounded-[10px] uppercase bg-red-400 text-white w-full text-center">
-                    {err}
-                  </p>
-                )}
-                {success && (
-                  <p className="font-san font-bold text-lg py-2 uppercase rounded-[10px]   bg-green-400 text-white w-full text-center">
-                    {success}
-                  </p>
-                )}
+
                 <input
                   onChange={handleEmail}
                   value={email}
@@ -180,7 +183,7 @@ const Registration = () => {
                   className="w-full font-san flex justify-center font-semibold placeholder:text-white  placeholder:text-center placeholder:capitalize  text-sm bg-[#1e2833] py-[10px] text-white px-[30px] rounded-[30px] border"
                 />
                 {loader ? (
-                  <div className="w-full  flex justify-center items-center border border-solid rounded-[5px] ">
+                  <div className="w-full font-san flex justify-center font-bold  text-sm bg-[#9b9ea1] py-[10px] mt-6 text-white uppercase px-[30px] rounded-[30px] border">
                     <ThreeDots
                       height="80"
                       width="80"

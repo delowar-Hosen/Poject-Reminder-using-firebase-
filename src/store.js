@@ -5,6 +5,7 @@ import pdfInputSlice from "./reduxToolkit/pdfInputSlice";
 import rechargeSlice from "./reduxToolkit/rechargeSlice";
 import paidHistorySlice from "./reduxToolkit/paidHistorySlice";
 import rechargeAlertSlice from "./reduxToolkit/rechargeAlertSlice";
+import authUserSlice from "./reduxToolkit/authUserSlice";
 
 const reducers = combineReducers({
   paid: paidSlice,
@@ -13,6 +14,7 @@ const reducers = combineReducers({
   recharge: rechargeSlice,
   paidHistory: paidHistorySlice,
   rechargeAlert: rechargeAlertSlice,
+  auth: authUserSlice,
 });
 
 export const store = configureStore({

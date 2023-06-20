@@ -8,6 +8,8 @@ import {
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { getDatabase, ref, set, push, onValue } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { authData } from "../reduxToolkit/authUserSlice";
 
 const Navbar = () => {
   const [paidPage, setPaidPage] = useState(false);
@@ -21,6 +23,7 @@ const Navbar = () => {
   const auth = getAuth();
   const navigate = useNavigate();
   const db = getDatabase();
+  let dispatch = useDispatch();
 
   let handleAreaManager = (e) => {
     setAreaManager(e.target.value);
@@ -80,6 +83,7 @@ const Navbar = () => {
         }
       });
       setuser(arr);
+      dispatch(authData(arr))
     });
   }, []);
   return (

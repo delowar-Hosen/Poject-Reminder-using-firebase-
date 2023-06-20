@@ -132,7 +132,7 @@ const Addbox = () => {
           </p>
         )}
         {success && (
-          <p className="font-san font-semibold text-sm mb-2 py-2 uppercase rounded-[10px]   bg-green-400 text-white w-full text-center">
+          <p className="font-san font-normal text-sm mb-2 py-2 uppercase rounded-[10px]   bg-green-400 text-white w-full text-center">
             {success}
           </p>
         )}

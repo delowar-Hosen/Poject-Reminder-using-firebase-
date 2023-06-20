@@ -185,10 +185,10 @@ const Registration = () => {
                 {loader ? (
                   <div className="w-full font-san flex justify-center font-bold  text-sm bg-[#9b9ea1] py-[10px] mt-6 text-white uppercase px-[30px] rounded-[30px] border">
                     <ThreeDots
-                      height="80"
-                      width="80"
+                      height="20"
+                      width="20"
                       radius="9"
-                      color="#4fa94d"
+                      color="#1e2833"
                       ariaLabel="three-dots-loading"
                       wrapperStyle={{}}
                       wrapperClassName=""

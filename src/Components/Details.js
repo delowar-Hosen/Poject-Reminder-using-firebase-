@@ -2,14 +2,14 @@ import React from "react";
 
 const Details = () => {
   return (
-    <div className="flex  p-5">
+    <div className="flex  p-5 ">
       <div className="w-[15%]">
         <img className=" w-24 h-24 bg-red-500" />
         <h3 className="font-san font-bold text-lg mt-3 text-black uppercase">
           Delowar Hosain
         </h3>
       </div>
-      <div className="flex  w-[45%]">
+      <div className="flex   w-[45%]">
         <div>
           <p className="font-san font-bold text-lg mr-4  ">
             ID Number:

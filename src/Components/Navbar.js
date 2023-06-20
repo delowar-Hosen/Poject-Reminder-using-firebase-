@@ -34,6 +34,8 @@ const Navbar = () => {
   };
 
   let handleArea = () => {
+    setSubErr("");
+    setSuccess("");
     setPaidPage(true);
   };
 
@@ -50,8 +52,6 @@ const Navbar = () => {
   let handleSubArea = () => {
     if (!areaName) {
       setSubErr("Please Select A Area Name");
-    } else if (!areaManager) {
-      setSubErr("Please Select A Manager Name");
     } else {
       setSuccess("Successfully Added");
       set(push(ref(db, "areas/")), {
@@ -60,6 +60,9 @@ const Navbar = () => {
         userId: auth.currentUser.uid,
       });
     }
+    setTimeout(() => {
+      setPaidPage(false);
+    }, 3000);
   };
 
   useEffect(() => {
@@ -83,7 +86,7 @@ const Navbar = () => {
         }
       });
       setuser(arr);
-      dispatch(authData(arr))
+      dispatch(authData(arr));
     });
   }, []);
   return (
@@ -158,59 +161,40 @@ const Navbar = () => {
               Add Your SubArea
             </h3>
             <div className=" mt-8">
-              {/* {paidErr && (
+              {subErr && (
                 <p className="w-full py-2 flex items center justify-center font-san font-semibold text-white bg-red-500 mt-4 mb-4 rounded-lg">
-                  {paidErr}
+                  {subErr}
                 </p>
               )}
-              {paidsuccess && (
+              {success && (
                 <p className="w-full py-2 flex items center font-san font-semibold text-white justify-center bg-green-500 mt-4 mb-4 rounded-lg">
-                  {paidsuccess}
+                  {success}
                 </p>
-              )} */}
-              <div className="flex items-center w-full">
-                <span className="font-san font-semibold text-lg  w-[250px] mr-[5px]">
+              )}
+              <div className="flex items-center w-[400px] m-auto">
+                <span className="font-san font-semibold text-lg  w-[250px] mr-[4px]">
                   {" "}
                   Area Name:
                 </span>
-                <select
+                <input
                   id="countries"
+                  placeholder="Enter Your Subarea"
                   onChange={handleAreaName}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                  <option selected>Choose A Area</option>
-                  <option value="Bisra Kandi">Bisra Kandi</option>
-                  <option value="Uttar Kulaura">Uttor Kulaura</option>
-                  <option value="Hid Road">Hid Road</option>
-                </select>
+                  className="bg-gray-50 border capitalize border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
               </div>
 
-              <div className="flex items-center w-full mt-4">
-                <span className="font-san font-semibold text-lg  w-[250px] mr-[5px]">
-                  {" "}
-                  Area Manager:
-                </span>
-                <select
-                  id="countries"
-                  onChange={handleAreaManager}
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                >
-                  <option selected>Choose A Name</option>
-                  <option value="Delowar Hosen">Delowar Hosen</option>
-                  <option value="Kawsar">Kawsar Ahmed</option>
-                </select>
-              </div>
-              <div className="flex  justify-end mt-8">
+              <div className="flex  justify-end mt-4">
                 <div className="w-[200px] flex justify-between">
                   <button
                     onClick={() => setPaidPage(false)}
-                    className="font-san  font-semibold text-lg py-2 px-3 rounded-lg bg-[#e42424] text-white"
+                    className="font-san  font-semibold text-base py-2 px-3 rounded-lg bg-[#e42424] text-white"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSubArea}
-                    className="font-san font-semibold text-lg py-2 px-3 rounded-lg bg-slate-900 text-white"
+                    className="font-san font-semibold text-base py-2 px-3 rounded-lg bg-slate-900 text-white"
                   >
                     Add
                   </button>

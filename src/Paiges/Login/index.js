@@ -4,6 +4,9 @@ import Container from "../../Components/Container";
 import { ThreeDots } from "react-loader-spinner";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Helmet } from "react-helmet";
+import { useDispatch } from "react-redux";
+import { getDatabase, ref, set, push, onValue } from "firebase/database";
+import { authData } from "../../reduxToolkit/authUserSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +18,8 @@ const Login = () => {
 
   const auth = getAuth();
   const navigate = useNavigate();
+  let dispatch = useDispatch();
+  const db = getDatabase();
 
   let handleEmail = (e) => {
     setEmail(e.target.value);
@@ -53,6 +58,17 @@ const Login = () => {
             setLoader(false);
           } else {
             setSuccess("Welcome To Reminder");
+            const starCountRef = ref(db, "users/");
+            onValue(starCountRef, (snapshot) => {
+              let arr = [];
+              snapshot.forEach((item) => {
+                if (auth.currentUser.uid == item.val().id) {
+                  arr.push(item.val());
+                }
+              });
+              dispatch(authData(arr));
+              localStorage.setItem("auth", JSON.stringify(arr));
+            });
             setTimeout(() => {
               navigate("/");
             }, 2000);
@@ -89,7 +105,7 @@ const Login = () => {
             </picture>
           </div>
           <div className="w-1/2">
-          <div className="w-[400px] mb-4">
+            <div className="w-[400px] mb-4">
               {err && (
                 <p className="font-san font-bold text-sm py-1 rounded-[30px]  capitalize border-b border-solid border-[#1e2833] bg-red-400 text-white w-full text-center">
                   {err}

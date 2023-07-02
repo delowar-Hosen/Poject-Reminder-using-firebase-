@@ -10,20 +10,27 @@ import RCHList from "./Paiges/RechargeList";
 import Registration from "./Paiges/Registration";
 import Setting from "./Paiges/Settings";
 import DocumentReader from "./Components/DocumentReader";
+import Loginuser from "./Private Route/loginUser";
+import Logoutuser from "./Private Route/logoutUser";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/registration" element={<Registration />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/boxadd" element={<Boxadd />} />
-      <Route path="/alert" element={<Alert />} />
-      <Route path="/message" element={<Message />} />
-      <Route path="/rechargelist" element={<RCHList />} />
-      <Route path="/details" element={<Details />} />
-      <Route path="/settings" element={<Setting />} />
-      <Route path="/download" element={<DocumentReader />} />
+      <Route element={<Logoutuser />}>
+        <Route path="/" element={<Home />}>
+          <Route path="/boxadd" element={<Boxadd />} />
+          <Route path="/alert" element={<Alert />} />
+          <Route path="/message" element={<Message />} />
+          <Route path="/rechargelist" element={<RCHList />} />
+          <Route path="/details" element={<Details />} />
+          <Route path="/settings" element={<Setting />} />
+          <Route path="/download" element={<DocumentReader />} />
+        </Route>
+      </Route>
+      <Route element={<Loginuser />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/registration" element={<Registration />} />
+      </Route>
     </Routes>
   );
 }

@@ -25,10 +25,6 @@ const Navbar = () => {
   const db = getDatabase();
   let dispatch = useDispatch();
 
-  let handleAreaManager = (e) => {
-    setAreaManager(e.target.value);
-  };
-
   let handleAreaName = (e) => {
     setAreaName(e.target.value);
   };
@@ -47,6 +43,8 @@ const Navbar = () => {
       .catch((error) => {
         console.log(error);
       });
+    localStorage.removeItem("auth");
+    dispatch(authData(null));
   };
 
   let handleSubArea = () => {
@@ -86,7 +84,6 @@ const Navbar = () => {
         }
       });
       setuser(arr);
-      dispatch(authData(arr));
     });
   }, []);
   return (

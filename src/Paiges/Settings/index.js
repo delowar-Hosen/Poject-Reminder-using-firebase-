@@ -8,30 +8,16 @@ import Sidebar from "../../Components/Sidebar";
 import Settings from "../../Components/Settings";
 import DocumentReader from "../../Components/DocumentReader";
 import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
 
 const Setting = () => {
-  const [varify, setVarify] = useState(false);
-
-  const auth = getAuth();
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!auth.currentUser) {
-      navigate("/login");
-    } else {
-      if (!auth.currentUser.emailVerified) {
-        setVarify(false);
-      } else {
-        setVarify(true);
-      }
-    }
-  }, []);
+  let user = useSelector((item) => item.auth.value);
 
   return (
     <div>
-      {varify && (
+      {user && (
         <div>
-            <Helmet>
+          <Helmet>
             <title>Reminder</title>
           </Helmet>
           <div className="w-full">

@@ -1,16 +1,14 @@
 import React from "react";
-import { ImUsers, ImBoxAdd, ImBoxRemove } from "react-icons/im";
+import { ImUsers, ImBoxAdd } from "react-icons/im";
 import { RiTodoLine } from "react-icons/ri";
 import {
   AiFillAlert,
   AiFillSetting,
-  AiFillMessage,
   AiFillFileAdd,
 } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 
 const Sidebar = ({ active }) => {
-  const navigate = useNavigate();
 
   return (
     <div className=" w-40 bg-[#1e2833] flex flex-col  gap-y-12 items-center justify-center py-10">

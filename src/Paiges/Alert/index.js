@@ -5,29 +5,17 @@ import Navbar from "../../Components/Navbar";
 import Rechargereminder from "../../Components/Rechargereminder";
 import Sidebar from "../../Components/Sidebar";
 import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
 
 const Alert = () => {
-  const [varify, setVarify] = useState(false);
+  let user = useSelector((item) => item.auth.value);
 
-  const auth = getAuth();
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!auth.currentUser) {
-      navigate("/login");
-    } else {
-      if (!auth.currentUser.emailVerified) {
-        setVarify(false);
-      } else {
-        setVarify(true);
-      }
-    }
-  }, []);
   return (
     <div>
-      {varify && (
+      {user && (
         <div>
-            <Helmet>
+          <Helmet>
             <title>Reminder</title>
           </Helmet>
           <div className="w-full">

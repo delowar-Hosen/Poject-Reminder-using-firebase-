@@ -1,31 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { getAuth } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../Components/Navbar";
 import Addbox from "../../Components/Addbox";
 import Sidebar from "../../Components/Sidebar";
 import { Helmet } from "react-helmet";
+import { useSelector } from "react-redux";
 
 const Boxadd = () => {
   const [varify, setVarify] = useState(false);
 
-  const auth = getAuth();
-  const navigate = useNavigate();
+  let user = useSelector((item) => item.auth.value);
 
-  useEffect(() => {
-    if (!auth.currentUser) {
-      navigate("/login");
-    } else {
-      if (!auth.currentUser.emailVerified) {
-        setVarify(false);
-      } else {
-        setVarify(true);
-      }
-    }
-  }, []);
+ 
   return (
     <div>
-      {varify && (
+      {user && (
         <div>
             <Helmet>
             <title>Reminder</title>

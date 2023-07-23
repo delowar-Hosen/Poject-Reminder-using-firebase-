@@ -252,7 +252,7 @@ const Settings = () => {
               ) : (
                 <p
                   onClick={handleNameEdit}
-                  className="flex justify-center items-center cursor-pointer"
+                  className="flex justify-center lg:justify-start items-center cursor-pointer"
                 >
                   <AiTwotoneEdit className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
                   <span className="font-pop font-normal text-sm lg:text-xl">
@@ -261,7 +261,7 @@ const Settings = () => {
                 </p>
               )}
 
-              <p className="flex justify-center items-center cursor-pointer">
+              <p className="flex justify-center lg:justify-start items-center cursor-pointer">
                 <AiOutlineDownload className=" text-base lg:text-[27px] mr-2 lg:mr-9 " />
                 <span
                   onClick={() => setDownload(!download)}
@@ -272,14 +272,14 @@ const Settings = () => {
               </p>
               <p
                 onClick={handleReset}
-                className="flex justify-center items-center cursor-pointer"
+                className="flex justify-center lg:justify-start items-center cursor-pointer"
               >
                 <GrPowerReset className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
                 <span className="font-pop font-normal text-sm lg:text-xl">Reset</span>
               </p>
               <p
                 onClick={handleHardReset}
-                className="flex justify-center items-center cursor-pointer"
+                className="flex justify-center lg:justify-start items-center cursor-pointer"
               >
                 <MdRestore className=" text-base lg:text-[27px] mr-2 lg:mr-9 " />
                 <span className="font-pop font-normal text-sm lg:text-xl">Hard Reset</span>

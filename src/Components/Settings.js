@@ -221,7 +221,7 @@ const Settings = () => {
                     </div>
                   </div>
                 </div>
-                <div className="lg:ml-8 lg:mt-2 text-center">
+                <div className="lg:ml-8 lg:mt-2 text-center lg:text-left">
                   {nameEdit ? (
                     <div className="flex gap-x-1 items-center">
                       <input

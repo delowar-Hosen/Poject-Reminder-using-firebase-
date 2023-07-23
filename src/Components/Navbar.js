@@ -87,38 +87,41 @@ const Navbar = () => {
     });
   }, []);
   return (
-    <div className="border-b-2  bg-[#868e96]  border-solid">
+    <div className=" border-b-2 p-2 lg:p-0  bg-[#868e96]  border-solid">
       <Container>
         <div
-          className="flex items-center justify-between py-6 
+          className="relative lg:flex items-center justify-between py-6 
         "
         >
           {user.map((item) => (
-            <div className="flex items-center">
-              <div className="relative group">
-                <img className=" w-14 h-14 rounded-full" src={item.avatar} />
+            <div className=" border-b lg:border-0 pb-2 lg:pb-0 flex items-center">
+              <div className="relative group cursor-pointer">
+                <img
+                  className=" w-12 h-12 lg:w-14 lg:h-14 rounded-full"
+                  src={item.avatar}
+                />
                 <div className="absolute top-0 left-0">
                   <div className="hidden group-hover:block ease-linear">
-                    <div className="   w-14 h-14 rounded-full text-white bg-[#00000069] flex justify-center items-center">
+                    <div className=" w-12 h-12  lg:w-14 lg:h-14 rounded-full text-white bg-[#00000069] flex justify-center items-center">
                       <AiOutlineCloudUpload />
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className=" ml-3">
-                <h2 className="font-san font-bold  text-lg   text-white">
+              <div className="ml-1 lg:ml-3">
+                <h2 className="font-san font-bold  text-sm lg:text-lg   text-white">
                   {item.name}
                 </h2>
-                <p className="font-san font-normal  text-sm   text-white">
+                <p className="font-san font-normal  text-xs lg:text-sm   text-white">
                   Area Manager
                 </p>
               </div>
             </div>
           ))}
 
-          <div>
-            <ul className="font-san  font-bold cursor-pointer items-center text-base  text-white flex  gap-x-6">
+          <div className="flex justify-center items-center pt-2 lg:pt-0">
+            <ul className="font-san font-normal lg:font-bold cursor-pointer  text-[12px] lg:text-base  text-white  capitalize  flex flex-wrap gap-x-2 justify-center items-center  lg:gap-x-6">
               {areas.length < 0 ? (
                 <li onClick={handleArea} className=" flex items-center">
                   Add Your SubArea
@@ -138,23 +141,25 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-          <div
-            onClick={handleLogOut}
-            className="flex  items-center cursor-pointer"
-          >
-            <p className="font-san font-semibold text-base  text-white mr-3">
-              LogOut
-            </p>
-            <div className="border border-white  rounded-full w-10 h-10 flex items-center justify-center">
-              <AiOutlineLogout className="text-lg text-red-600" />
+          <div className=" absolute top-5 right-0 lg:static">
+            <div
+              onClick={handleLogOut}
+              className="flex  items-center cursor-pointer"
+            >
+              <p className="font-san font-semibold text-base  text-white mr-3">
+                LogOut
+              </p>
+              <div className="border border-white  rounded-full w-10 h-10 flex items-center justify-center">
+                <AiOutlineLogout className="text-lg text-red-600" />
+              </div>
             </div>
           </div>
         </div>
       </Container>
       {paidPage && (
         <div className="w-full h-screen bg-[#00000031] fixed top-0 left-0 z-50 flex justify-center items-center">
-          <div className="w-[500px] flex flex-col items-center p-6 bg-white rounded-lg">
-            <h3 className="font-san font bold text-2xl uppercase">
+          <div className="w-[300px] lg:w-[500px] flex flex-col items-center p-6 bg-white rounded-lg">
+            <h3 className="font-san font bold text-sm lg:text-2xl uppercase border-b lg:border-0 pb-2 lg:pb-0">
               Add Your SubArea
             </h3>
             <div className=" mt-8">
@@ -168,8 +173,8 @@ const Navbar = () => {
                   {success}
                 </p>
               )}
-              <div className="flex items-center w-[400px] m-auto">
-                <span className="font-san font-semibold text-lg  w-[250px] mr-[4px]">
+              <div className="flex items-center  lg:w-[400px] m-auto">
+                <span className="font-san font-semibold text-base lg:text-lg  w-[250px]  lg:mr-[4px]">
                   {" "}
                   Area Name:
                 </span>
@@ -182,10 +187,10 @@ const Navbar = () => {
               </div>
 
               <div className="flex  justify-end mt-4">
-                <div className="w-[200px] flex justify-between">
+                <div className="w-[200px] flex justify-end lg:justify-between">
                   <button
                     onClick={() => setPaidPage(false)}
-                    className="font-san  font-semibold text-base py-2 px-3 rounded-lg bg-[#e42424] text-white"
+                    className="font-san  font-semibold mr-4 lg:mr-0 text-base py-2 px-3 rounded-lg bg-[#e42424] text-white"
                   >
                     Cancel
                   </button>

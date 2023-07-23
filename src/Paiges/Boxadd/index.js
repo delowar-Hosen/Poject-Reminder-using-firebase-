@@ -14,18 +14,18 @@ const Boxadd = () => {
   return (
     <div>
       {user && (
-        <div>
+        <div className="relative">
             <Helmet>
             <title>Reminder</title>
           </Helmet>
           <div className="w-full">
             <Navbar />
           </div>
-          <div className="flex">
-            <div className="w-[10%]">
+          <div className="lg:flex">
+          <div className=" absolute bottom-[-122px]  left-0 lg:static  w-full lg:w-[15%]">
               <Sidebar active="boxadd" />
             </div>
-            <div className="w-[90%]">
+            <div className="lg:w-[85%]">
               <Addbox />
             </div>
           </div>

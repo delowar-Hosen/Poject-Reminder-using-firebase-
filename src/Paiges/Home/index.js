@@ -11,28 +11,25 @@ import Userlist from "../../Components/Userlist";
 import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 
-
 const Home = () => {
- 
   let user = useSelector((item) => item.auth.value);
-
-
 
   return (
     <>
       {user && (
-        <div>
+        <div className="relative">
           <Helmet>
             <title>Reminder</title>
           </Helmet>
           <div className="w-full">
             <Navbar />
           </div>
-          <div className="flex">
-            <div className="w-[15%]">
+          <div className="lg:flex">
+            
+            <div className=" absolute bottom-[-122px]  left-0 lg:static  w-full lg:w-[15%]">
               <Sidebar active="home" />
             </div>
-            <div className="w-[85%]">
+            <div className=" w-full lg:w-[85%]">
               <Userlist />
             </div>
           </div>

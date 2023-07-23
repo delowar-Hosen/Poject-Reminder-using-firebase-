@@ -121,7 +121,7 @@ const Addbox = () => {
   };
 
   return (
-    <div className="p-2 w-[700px] m-auto">
+    <div className="p-2 lg:w-[700px] m-auto">
       <h2 className="font-san font-bold mb-2 text-2xl text-black text-center">
         User Information
       </h2>
@@ -137,42 +137,42 @@ const Addbox = () => {
           </p>
         )}
       </div>
-      <div className="w-[600px] m-auto bg-[#1e2833] text-white p-2 rounded-md">
+      <div className="lg:w-[600px] m-auto bg-[#1e2833] text-white p-2 rounded-md">
         <div>
-          <p className="font-san flex items-center justify-between font-semibold text-sm uppercase mt-4 ">
+          <p className="font-san flex  items-center justify-between font-semibold text-[10px] lg:text-sm uppercase mt-4 ">
             Client Name :
             <input
               onChange={handleClientName}
               value={cName}
-              className="font-san font-normal w-[350px] ml-1 rounded-lg  text-sm  px-12 py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
+              className="font-san font-normal  w-[200px] lg:w-[350px] ml-1 rounded-lg  text-sm  px-12 py-[2px] lg:py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
               placeholder="Client Name"
             />
           </p>
-          <p className="font-san flex items-center justify-between font-semibold text-sm uppercase mt-4 ">
-            Client Father/Husband Name :
+          <p className="font-san flex items-center justify-between font-semibold text-[10px] lg:text-sm uppercase mt-4 ">
+            Client Father/Husband Name:
             <input
               onChange={handleFaterName}
               value={fName}
-              className="font-san font-normal w-[350px] ml-1 rounded-lg  text-sm  px-12 py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
+              className="font-san font-normal  w-[200px] lg:w-[350px] ml-1 rounded-lg  text-sm  px-12 py-[2px] lg:py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
               placeholder="Father/Husband Name"
             />
           </p>
-          <p className="font-san flex items-center justify-between font-semibold text-sm uppercase mt-4 ">
+          <p className="font-san flex items-center justify-between font-semibold text-[10px] lg:text-sm uppercase mt-4 ">
             Client Phone Number :
             <input
               onChange={handlePhone}
               value={phone}
-              className="font-san font-normal w-[350px] ml-1 rounded-lg  text-sm  px-12 py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
+              className="font-san font-normal w-[200px] lg:w-[350px] ml-1 rounded-lg  text-sm  px-12 py-[2px] lg:py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
               placeholder="Enter Client Phone Number"
             />
           </p>
 
-          <p className="font-san flex items-center justify-between font-semibold text-sm uppercase mt-4 ">
+          <p className="font-san flex items-center justify-between font-semibold text-[10px] lg:text-sm uppercase mt-4 ">
             Client Area Name :{" "}
             <select
               onChange={handleArea}
               id="countries"
-              className="font-san font-normal w-[350px] ml-1 rounded-lg  text-sm  px-12 py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid text-center "
+              className="font-san font-normal w-[200px] lg:w-[350px] ml-1 rounded-lg  text-sm  px-12 py-[2px] lg:py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid text-center "
             >
               <option selected>Choose a Area</option>
               <option value="Bisra Kandi">Bisra Kandi</option>
@@ -182,30 +182,30 @@ const Addbox = () => {
               <option value="Joi Chondi">JoiChondi</option>
             </select>
           </p>
-          <p className="font-san flex items-center justify-between font-semibold text-sm uppercase mt-4 ">
+          <p className="font-san flex items-center justify-between font-semibold text-[10px] lg:text-sm uppercase mt-4 ">
             Box Id Number :
             <input
               onChange={handleBoxId}
               value={boxId}
-              className="font-san font-normal w-[350px] ml-1 rounded-lg  text-sm  px-12 py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
+              className="font-san font-normal w-[200px] lg:w-[350px] ml-1 rounded-lg  text-sm  px-12 py-[2px] lg:py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
               placeholder="Enter Box Id Number"
             />
           </p>
-          <p className="font-san flex items-center justify-between font-semibold text-sm uppercase mt-4 ">
+          <p className="font-san flex items-center justify-between font-semibold  text-[10px] lg:text-sm uppercase mt-4 ">
             Box Price :
             <input
               onChange={handlePrice}
               value={price}
-              className="font-san font-normal w-[350px] ml-1 rounded-lg  text-sm  px-12 py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
+              className="font-san font-normal w-[200px] lg:w-[350px] ml-1 rounded-lg  text-sm  px-12 py-[2px] lg:py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
               placeholder="Enter Client National Id Number"
             />
           </p>
-          <p className="font-san flex items-center justify-between font-semibold text-sm uppercase mt-4 ">
+          <p className="font-san flex items-center justify-between font-semibold text-[10px] lg:text-sm uppercase mt-4 ">
             Client National Id Number :
             <input
               onChange={handleId}
               value={iD}
-              className="font-san font-normal w-[350px] ml-1 rounded-lg  text-sm  px-12 py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
+              className="font-san font-normal w-[200px] lg:w-[350px] ml-1 rounded-lg  text-sm  px-12 py-[2px] lg:py-2  capitalize text-black  placeholder:text-center placeholder:font-san placeholder:font-normal placeholder:text-sm border border-solid "
               placeholder="Enter Client National Id Number"
             />
           </p>

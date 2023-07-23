@@ -10,29 +10,24 @@ import { useSelector } from "react-redux";
 const Alert = () => {
   let user = useSelector((item) => item.auth.value);
 
-
   return (
     <div>
       {user && (
-        <div>
+        <div className="relative">
           <Helmet>
             <title>Reminder</title>
           </Helmet>
           <div className="w-full">
             <Navbar />
           </div>
-          <div className="flex">
-            <div className="w-[10%]">
+          <div className="lg:flex">
+          <div className=" absolute bottom-[-315px]  left-0 lg:static  w-full lg:w-[15%]">
               <Sidebar active="alert" />
             </div>
-            <div className="w-[90%]">
+            <div className="lg:w-[90%]">
               <Rechargereminder />
             </div>
           </div>
-          {/* <Details /> */}
-          {/* <Addbox /> */}
-          {/* <Rechargereminder /> */}
-          {/* <Rechargelist /> */}
         </div>
       )}
     </div>

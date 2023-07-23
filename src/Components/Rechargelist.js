@@ -23,8 +23,11 @@ const Rechargelist = () => {
       presentDate.getTime() + 30 * 24 * 60 * 60 * 1000
     );
 
+    let alertDate = new Date(presentDate.getTime() + 28 * 24 * 60 * 60 * 1000);
+
     let startLocalFormat = new Date().toLocaleDateString();
     let endLocalFormat = rechargeEndDate.toLocaleDateString();
+    let alertLocalFormat = alertDate.toLocaleDateString();
 
     set(push(ref(db, "rechargeList/")), {
       clientName: item.clientName,
@@ -37,6 +40,7 @@ const Rechargelist = () => {
       managername: item.managername,
       RechargeStartDate: startLocalFormat,
       RechargeEndDate: endLocalFormat,
+      RechargeAlertDate: alertLocalFormat,
       id: item.id,
     });
   };
@@ -86,7 +90,7 @@ const Rechargelist = () => {
   };
 
   return (
-    <div className=" w-[90%] m-auto">
+    <div className=" w-full m-auto pl-8 pr-4">
       {addRecharge ? (
         <div className="w-full relative mt-4 ">
           <h2 className="font-san text-center  font-bold text-2xl ">
@@ -94,7 +98,7 @@ const Rechargelist = () => {
           </h2>
           <button
             onClick={() => setAddRecharge(!addRecharge)}
-            className="font-san py-3 px-3 absolute top-0 right-0  bg-black text-white rounded-md font-bold text-base uppercase text-right"
+            className="font-san py-3 px-3 absolute top-8 lg:top-0 right-0  bg-black text-white rounded-md font-bold text-[10px] lg:text-base uppercase text-right"
           >
             Cancel
           </button>
@@ -107,65 +111,75 @@ const Rechargelist = () => {
             </h2>
             <button
               onClick={() => setAddRecharge(!addRecharge)}
-              className="font-san py-3 px-3 absolute top-0 right-0  bg-black text-white rounded-md font-semibold text-base uppercase text-right"
+              className="font-san py-3 px-3 absolute top-8 lg:top-0 right-0  bg-black text-white rounded-md font-semibold text-[10px] lg:text-base uppercase text-right"
             >
               Add Recharge List
             </button>
           </div>
-          <div className="flex mt-12 w-[98.6%]">
-            <p className="font-san font-semibold text-base  border border-solid flex justify-center items-center  w-[70px] py-3">
-              Serial{" "}
-            </p>
-            <p className="font-san font-semibold text-base  border border-solid py-3 flex justify-center items-center  w-[300px]">
-              Member Name{" "}
-            </p>
-            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[175px]">
-              STB ID Number{" "}
-            </p>
-            <p className="font-san font-semibold text-base flex items-center justify-center border border-solid py-3  w-[150px]">
-              Area Name{" "}
-            </p>
-            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[130px]">
-              Issue Date{" "}
-            </p>
-            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[110px]">
-              Status{" "}
-            </p>
-            <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[200px]">
-              Recharge Start Date
-            </p>
-            <button className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[200px]">
-              Recharge End Date
-            </button>
+
+          <div className="w-full mt-10">
+            <ul className="flex w-full  font-san font-bold uppercase text-[10px] md:text-sm">
+              <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
+                Serial
+              </li>
+              <li className=" w-[38%] md:w-[30%] h-[50px] border flex justify-center items-center">
+                Name
+              </li>
+              <li className=" w-[10%] md:w-[8%] text-center h-[50px] border flex justify-center items-center">
+                stb id
+              </li>
+              <li className=" w-[16%] md:w-[11%] h-[50px] border flex justify-center items-center">
+                area
+              </li>
+              <li className=" w-[12%] md:w-[6%] h-[50px] border flex justify-center items-center">
+                Status
+              </li>
+              <li className="w-[10%] md:[10%] h-[50px] border hidden md:flex justify-center items-center">
+                {" "}
+                Issue Date
+              </li>
+              <li className="w-[14%] md:[16%] h-[50px] border hidden md:flex justify-center items-center">
+                {" "}
+                Last rch
+              </li>
+              <li className="w-[14%] md:w-[16%] text-center h-[50px] border flex justify-center items-center">
+                end rch
+              </li>
+            </ul>
           </div>
-          <div className=" h-[60vh] overflow-y-scroll">
+          <div id="user" className="h-[200px] md:[350px]">
             {rechargeList.map((item, index) => (
-              <div key={index} className="flex">
-                <p className="font-san font-normal text-sm border border-solid flex justify-center items-center  w-[70px] py-3">
+              <ul
+                key={index}
+                className="flex w-full  font-san font-normal uppercase text-[10px] md:text-sm"
+              >
+                <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
                   {index + 1}
-                </p>
-                <p className="font-san font-normal text-sm  border border-solid py-3 flex justify-center items-center  w-[300px]">
+                </li>
+                <li className=" w-[38%] md:w-[30%] h-[50px] border flex justify-center items-center">
                   {item.clientName}
-                </p>
-                <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[175px]">
-                  {item.fatherName}
-                </p>
-                <p className="font-san font-normal text-sm flex items-center justify-center border border-solid py-3  w-[150px]">
+                </li>
+                <li className=" w-[10%] md:w-[8%] h-[50px] border flex justify-center items-center">
+                  {item.boxId}
+                </li>
+                <li className=" w-[16%] md:w-[11%] h-[50px] border flex text-center justify-center items-center">
                   {item.areaname}
-                </p>
-                <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[130px]">
-                  Issue Date{" "}
-                </p>
-                <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[110px]">
+                </li>
+                <li className=" w-[12%] md:w-[6%] h-[50px] border flex justify-center items-center">
                   Status{" "}
-                </p>
-                <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[200px]">
-                  {item.RechargeStartDate}
-                </p>
-                <button className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[200px]">
-                  {item.RechargeEndDate}
-                </button>
-              </div>
+                </li>
+                <li className="w-[10%] h-[50px] border hidden md:flex justify-center items-center">
+                  {" "}
+                  {item.issueDate}
+                </li>
+                <li className="w-[14%]  md:[16%] h-[50px] border hidden md:flex justify-center items-center">
+                  {" "}
+                  Last Recharge Date{" "}
+                </li>
+                <li className="w-[14%] md:w-[16%] h-[50px] border flex justify-center  items-center">
+                  Recharge End Date
+                </li>
+              </ul>
             ))}
           </div>
         </div>
@@ -174,110 +188,120 @@ const Rechargelist = () => {
       {addRecharge && (
         <div>
           <Search state={handleSearch} />
-
-          <div className="mt-2 flex w-[98.6%] ">
-            <p className="font-san font-bold text-lg  border border-solid flex justify-center items-center  w-[70px] py-3">
-              Serial{" "}
-            </p>
-            <p className="font-san font-bold text-lg  border border-solid py-3 flex justify-center items-center  w-[300px]">
-              User Name{" "}
-            </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[175px]">
-              STB ID Number{" "}
-            </p>
-            <p className="font-san font-bold text-lg flex items-center justify-center border border-solid py-3  w-[150px]">
-              Area Name{" "}
-            </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[130px]">
-              Issue Date{" "}
-            </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[110px]">
-              Status{" "}
-            </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[180px]">
-              Phone Number{" "}
-            </p>
-            <p className="font-san font-bold text-lg flex justify-center items-center border border-solid py-3  w-[100px]">
-              Action
-            </p>
+          <div className="w-full mt-2">
+            <ul className="flex w-full  font-san font-bold uppercase text-[10px] md:text-sm">
+              <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
+                Serial
+              </li>
+              <li className=" w-[38%] md:w-[30%] h-[50px] border flex justify-center items-center">
+                Name
+              </li>
+              <li className=" w-[10%] md:w-[8%] h-[50px] border flex justify-center items-center">
+                stb id
+              </li>
+              <li className=" w-[16%] md:w-[11%] h-[50px] border flex justify-center items-center">
+                area
+              </li>
+              <li className=" w-[12%] md:w-[6%] h-[50px] border flex justify-center items-center">
+                Status
+              </li>
+              <li className="w-[10%] md:[10%] h-[50px] border hidden md:flex justify-center items-center">
+                {" "}
+                Issue Date
+              </li>
+              <li className="w-[14%] md:[16%] h-[50px] border hidden md:flex justify-center items-center">
+                {" "}
+                Phone Number{" "}
+              </li>
+              <li className="w-[14%] md:w-[16%] h-[50px] border bg-[#634747] text-white flex justify-center items-center">
+                Action
+              </li>
+            </ul>
           </div>
-          <div className="w-full h-[53vh] overflow-y-scroll">
+
+          <div id="user" className="h-[200px] md:h-[350px]">
             {search.length > 0
               ? search.map((item, index) => (
-                  <div key={index} className=" flex">
-                    <p className="font-san font-normal text-sm  border border-solid flex justify-center items-center  w-[70px] py-3">
+                  <ul
+                    key={index}
+                    className="flex w-full  font-san font-normal uppercase text-[10px] md:text-sm"
+                  >
+                    <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
                       {index + 1}
-                    </p>
-                    <p className="font-san font-normal text-sm  border border-solid py-3 flex justify-center items-center  w-[300px]">
+                    </li>
+                    <li className=" w-[38%] md:w-[30%] h-[50px] border flex justify-center items-center">
                       {item.clientName}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[175px]">
+                    </li>
+                    <li className=" w-[10%] md:w-[8%] h-[50px] border flex justify-center items-center">
                       {item.boxId}
-                    </p>
-                    <p className="font-san font-normal text-sm flex items-center justify-center border border-solid py-3  w-[150px]">
+                    </li>
+                    <li className=" w-[16%] md:w-[11%] h-[50px] border flex justify-center items-center">
                       {item.areaname}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[130px]">
+                    </li>
+                    <li className=" w-[12%] md:w-[6%] h-[50px] border flex justify-center items-center">
+                      Status
+                    </li>
+                    <li className="w-[10%] md:[10%] h-[50px] border hidden md:flex justify-center items-center">
                       {item.issueDate}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[110px]">
-                      Status{" "}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[180px]">
+                    </li>
+                    <li className="w-[14%] md:[16%] h-[50px] border hidden md:flex justify-center items-center">
                       {item.phone}
-                    </p>
+                    </li>
 
                     {isRunning.includes(item.id) ? (
-                      <button className="font-san font-normal text-sm flex justify-center bg-[#634747]  items-center border border-solid py-3  w-[100px]">
+                      <li className="w-[14%] md:w-[16%] h-[50px] border bg-[#634747] text-white flex justify-center items-center">
                         Running
-                      </button>
+                      </li>
                     ) : (
-                      <button
+                      <li
                         onClick={() => handleRecharge(item)}
-                        className="font-san font-normal text-sm flex justify-center bg-[#634747]  items-center border border-solid py-3  w-[100px]"
+                        className="w-[14%] md:w-[16%] h-[50px] border bg-[#634747] text-white flex justify-center items-center"
                       >
                         Recharge
-                      </button>
+                      </li>
                     )}
-                  </div>
+                  </ul>
                 ))
               : boxUsers.map((item, index) => (
-                  <div key={index} className=" flex">
-                    <p className="font-san font-normal text-sm  border border-solid flex justify-center items-center  w-[70px] py-3">
+                  <ul
+                    key={index}
+                    className="flex w-full  font-san font-normal uppercase text-[10px] md:text-sm"
+                  >
+                    <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
                       {index + 1}
-                    </p>
-                    <p className="font-san font-normal text-sm  border border-solid py-3 flex justify-center items-center  w-[300px]">
+                    </li>
+                    <li className=" w-[38%] md:w-[30%] h-[50px] border flex justify-center items-center">
                       {item.clientName}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[175px]">
+                    </li>
+                    <li className=" w-[10%] md:w-[8%] h-[50px] border flex justify-center items-center">
                       {item.boxId}
-                    </p>
-                    <p className="font-san font-normal text-sm flex items-center justify-center border border-solid py-3  w-[150px]">
+                    </li>
+                    <li className=" w-[16%] md:w-[11%] h-[50px] border flex justify-center items-center">
                       {item.areaname}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[130px]">
+                    </li>
+                    <li className=" w-[12%] md:w-[6%] h-[50px] border flex justify-center items-center">
+                      Status
+                    </li>
+                    <li className="w-[10%] md:[10%] h-[50px] border hidden md:flex justify-center items-center">
                       {item.issueDate}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[110px]">
-                      Status{" "}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[180px]">
+                    </li>
+                    <li className="w-[14%] md:[16%] h-[50px] border hidden md:flex justify-center items-center">
                       {item.phone}
-                    </p>
+                    </li>
 
                     {isRunning.includes(item.id) ? (
-                      <button className="font-san font-normal text-sm flex bg-[#634747] text-white  justify-center items-center border border-solid py-3  w-[100px]">
+                      <li className="w-[14%] md:w-[16%] h-[50px] border bg-[#634747] text-white flex justify-center items-center">
                         Running
-                      </button>
+                      </li>
                     ) : (
-                      <button
+                      <li
                         onClick={() => handleRecharge(item)}
-                        className="font-san font-normal text-sm flex bg-[#634747] text-white justify-center items-center border border-solid py-3  w-[100px]"
+                        className="w-[14%] md:w-[16%] h-[50px] border bg-[#634747] text-white flex justify-center items-center"
                       >
                         Recharge
-                      </button>
+                      </li>
                     )}
-                  </div>
+                  </ul>
                 ))}
           </div>
         </div>

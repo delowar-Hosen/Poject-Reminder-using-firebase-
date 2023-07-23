@@ -196,24 +196,24 @@ const Settings = () => {
 
   return (
     <div className="w-[90%] m-auto">
-      <div className="flex  gap-x-10 mt-4">
+      <div className="lg:flex  gap-x-10 mt-4">
         {download ? (
           <div>
             <DocumentReader click={() => setDownload(!download)} />
           </div>
         ) : (
-          <div className="w-1/2  border border-[#c9c5c542] p-5 rounded-md">
-            <h3 className="font-pop font-semibold text-xl mb-10">
+          <div className="lg:w-1/2  border border-[#c9c5c542] p-5 rounded-md">
+            <h3 className="font-pop text-center lg:text-left font-semibold text-xl mb-10">
               Profile Settings
             </h3>
             {user.map((item) => (
-              <div className="flex pb-8 border-b border-[#8a84848e]">
-                <div className="relative group">
+              <div className="flex flex-col lg:flex-row  pb-8 border-b border-[#8a84848e]">
+                <div className="relative group flex lg:block justify-center">
                   <img
-                    className=" mt-3 ml-4 w-[70px] h-[70px] border border-solid border-[#000] p-1 rounded-full"
+                    className=" lg:mt-3 lg:ml-4 w-[70px] h-[70px] border border-solid border-[#000] lg:p-1 rounded-full"
                     src={item.avatar}
                   />
-                  <div className="absolute top-[12px] left-[16px]">
+                  <div className="absolute    lg:top-[12px] lg:left-[16px]">
                     <div className="hidden group-hover:block ease-linear">
                       <div className="   w-[70px] h-[70px] rounded-full text-white bg-[#00000069] flex justify-center items-center">
                         <AiOutlineCloudUpload />
@@ -221,7 +221,7 @@ const Settings = () => {
                     </div>
                   </div>
                 </div>
-                <div className="ml-8 mt-2">
+                <div className="lg:ml-8 lg:mt-2 text-center">
                   {nameEdit ? (
                     <div className="flex gap-x-1 items-center">
                       <input
@@ -244,52 +244,52 @@ const Settings = () => {
               </div>
             ))}
 
-            <div className="p-[43px] flex flex-col gap-y-8">
+            <div className="p-5 lg:p-[43px] flex   flex-col gap-y-2 lg:gap-y-8">
               {nameEdit ? (
-                <span className="font-pop font-normal text-xl text-[#df4a4a]">
+                <span className="font-pop font-normal text-sm lg:text-xl text-[#df4a4a]">
                   Please Edit Your User Name
                 </span>
               ) : (
                 <p
                   onClick={handleNameEdit}
-                  className="flex items-center cursor-pointer"
+                  className="flex justify-center items-center cursor-pointer"
                 >
-                  <AiTwotoneEdit className="text-[27px] mr-9 " />
-                  <span className="font-pop font-normal text-xl">
+                  <AiTwotoneEdit className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                  <span className="font-pop font-normal text-sm lg:text-xl">
                     Edit Profile Name.
                   </span>
                 </p>
               )}
 
-              <p className="flex items-center cursor-pointer">
-                <AiOutlineDownload className="text-[27px] mr-9 " />
+              <p className="flex justify-center items-center cursor-pointer">
+                <AiOutlineDownload className=" text-base lg:text-[27px] mr-2 lg:mr-9 " />
                 <span
                   onClick={() => setDownload(!download)}
-                  className="font-pop font-normal text-xl"
+                  className="font-pop font-normal text-sm lg:text-xl"
                 >
                   Store Your Document
                 </span>
               </p>
               <p
                 onClick={handleReset}
-                className="flex items-center cursor-pointer"
+                className="flex justify-center items-center cursor-pointer"
               >
-                <GrPowerReset className="text-[27px] mr-9 " />
-                <span className="font-pop font-normal text-xl">Reset</span>
+                <GrPowerReset className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                <span className="font-pop font-normal text-sm lg:text-xl">Reset</span>
               </p>
               <p
                 onClick={handleHardReset}
-                className="flex items-center cursor-pointer"
+                className="flex justify-center items-center cursor-pointer"
               >
-                <MdRestore className="text-[27px] mr-9 " />
-                <span className="font-pop font-normal text-xl">Hard Reset</span>
+                <MdRestore className=" text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                <span className="font-pop font-normal text-sm lg:text-xl">Hard Reset</span>
               </p>
             </div>
           </div>
         )}
-        <div className="w-1/2  p-6 border border-[#c9c5c542] rounded-md">
+        <div className="lg:w-1/2  p-6 border border-[#c9c5c542] rounded-md">
           <div>
-            <h3 className="font-pop font-semibold  text-xl mb-5">
+            <h3 className="font-pop text-center font-semibold  text-xl mb-5">
               Box ID Settings
             </h3>
             <div className="mb-5">
@@ -299,7 +299,7 @@ const Settings = () => {
 
           {search.length > 0 ? (
             search.map((item) => (
-              <div className="pl-[43px] flex flex-col gap-y-8">
+              <div className="pl-[43px] flex flex-col gap-y-2 lg:gap-y-8">
                 {clientNameEdit ? (
                   <div className="flex gap-x-1 items-center">
                     <input
@@ -319,14 +319,14 @@ const Settings = () => {
                     </div>
                   </div>
                 ) : (
-                  <p className="flex items-center group">
-                    <FaUserEdit className="text-[27px]  mr-9 " />
-                    <span className="font-pop font-normal text-xl">
+                  <p className="flex justify-center items-center group">
+                    <FaUserEdit className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                    <span className="font-pop font-normal text-sm lg:text-xl">
                       {item.clientName}
                     </span>
                     <AiTwotoneEdit
                       onClick={() => setClientNameEdit(true)}
-                      className="text-[27px] hidden  ml-9 group-hover:block  "
+                      className=" text-base lg:text-[27px] hidden  lg:ml-9 group-hover:block  "
                     />
                   </p>
                 )}
@@ -350,14 +350,14 @@ const Settings = () => {
                     </div>
                   </div>
                 ) : (
-                  <p className="flex items-center group">
-                    <FaUserEdit className="text-[27px]  mr-9 " />
-                    <span className="font-pop font-normal text-xl">
+                  <p className="flex justify-center items-center group">
+                    <FaUserEdit className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                    <span className="font-pop font-normal text-sm lg:text-xl">
                       {item.fatherName}
                     </span>
                     <AiTwotoneEdit
                       onClick={() => setClientFatherNameEdit(true)}
-                      className="text-[27px] hidden  ml-9 group-hover:block  "
+                      className="base lg:text-[27px] hidden  lg:ml-9 group-hover:block  "
                     />
                   </p>
                 )}
@@ -383,15 +383,15 @@ const Settings = () => {
                 ) : (
                   <p
                     onClick={handlePasswordReset}
-                    className="flex items-center group"
+                    className="flex justify-center items-center group"
                   >
-                    <FaCreditCard className="text-[27px]  mr-9 " />
-                    <span className="font-pop font-normal text-xl">
+                    <FaCreditCard className="text-base lg:text-[27px]  mr-2 lg:mr-9 " />
+                    <span className="font-pop font-normal text-sm lg:text-xl">
                       {item.clientNationId}
                     </span>
                     <AiTwotoneEdit
                       onClick={() => setEditNationalId(true)}
-                      className="text-[27px] hidden  ml-9 group-hover:block  "
+                      className="text-[27px] hidden ml-2 lg:ml-9 group-hover:block  "
                     />
                   </p>
                 )}
@@ -417,24 +417,24 @@ const Settings = () => {
                 ) : (
                   <p
                     onClick={handlePasswordReset}
-                    className="flex items-center group"
+                    className="flex justify-center items-center group"
                   >
-                    <BsFillSimFill className="text-[27px]  mr-9 " />
-                    <span className="font-pop font-normal text-xl">
+                    <BsFillSimFill className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                    <span className="font-pop font-normal text-sm lg:text-xl">
                       {item.phone}
                     </span>
                     <AiTwotoneEdit
                       onClick={() => setPhoneEdit(true)}
-                      className="text-[27px] hidden  ml-9 group-hover:block  "
+                      className="text-[27px] hidden ml-2 lg:ml-9 group-hover:block  "
                     />
                   </p>
                 )}
 
-                <p className="flex items-center cursor-pointer">
-                  <AiFillDelete className="text-[27px] mr-9 " />
+                <p className="flex justify-center items-center cursor-pointer">
+                  <AiFillDelete className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
                   <span
                     onClick={() => handleDeleteBox(item)}
-                    className="font-pop font-normal text-xl"
+                    className="font-pop font-normal text-sm lg:text-xl"
                   >
                     Delete Box Account.
                   </span>
@@ -442,10 +442,10 @@ const Settings = () => {
               </div>
             ))
           ) : (
-            <div className="pl-[43px] flex flex-col gap-y-8">
-              <p className="flex items-center">
-                <FaUserEdit className="text-[27px]  mr-9 " />
-                <p className=" w-full font-pop font-normal text-xl relative group">
+            <div className="p-5 lg:pl-[43px] flex flex-col gap-y-4 lg:gap-y-8">
+              <p className="flex justify-center items-center">
+                <FaUserEdit className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                <p className="  w-full font-pop font-normal text-sm lg:text-xl relative group">
                   Edit Client Name
                   <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
                     Please Search For Change
@@ -453,9 +453,9 @@ const Settings = () => {
                 </p>
               </p>
 
-              <p className="flex items-center">
-                <FaUserEdit className="text-[27px]  mr-9 " />
-                <p className=" w-full font-pop font-normal text-xl relative group">
+              <p className="flex justify-center items-center">
+                <FaUserEdit className="text-base lg:text-[27px]  mr-2 lg:mr-9 " />
+                <p className=" w-full font-pop font-normal text-sm lg:text-xl relative group">
                   Edit Client Father Name
                   <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
                     Please Search For Change
@@ -463,9 +463,9 @@ const Settings = () => {
                 </p>
               </p>
 
-              <p className="flex items-center">
-                <FaCreditCard className="text-[27px]  mr-9 " />
-                <p className=" w-full font-pop font-normal text-xl relative group">
+              <p className="flex justify-center items-center">
+                <FaCreditCard className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                <p className=" w-full font-pop font-normal text-sm lg:text-xl relative group">
                   Edit Client National Id
                   <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
                     Please Search For Change
@@ -473,9 +473,9 @@ const Settings = () => {
                 </p>
               </p>
 
-              <p className="flex items-center">
-                <BsFillSimFill className="text-[27px]  mr-9 " />
-                <p className=" w-full font-pop font-normal text-xl relative group">
+              <p className="flex justify-center items-center">
+                <BsFillSimFill className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                <p className=" w-full font-pop font-normal text-sm lg:text-xl relative group">
                   Edit Client Phone Number
                   <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
                     Please Search For Change
@@ -483,9 +483,9 @@ const Settings = () => {
                 </p>
               </p>
 
-              <p className="flex items-center">
-                <AiFillDelete className="text-[27px] mr-9 " />
-                <p className=" w-full font-pop font-normal text-xl relative group">
+              <p className="flex justify-center items-center">
+                <AiFillDelete className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
+                <p className=" w-full font-pop font-normal text-sm lg:text-xl relative group">
                   Delete Box Account
                   <span className=" w-full absolute hidden group-hover:block   top-6 text-sm left-3 text-red-600">
                     Please Search For Delete

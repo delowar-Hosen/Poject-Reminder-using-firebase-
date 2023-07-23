@@ -3,6 +3,7 @@ import { getDatabase, ref, onValue } from "firebase/database";
 import Search from "./Search";
 import { useNavigate } from "react-router-dom";
 import { BsFillBackspaceReverseFill } from "react-icons/bs";
+import "../../src/index.css";
 
 const Userlist = () => {
   const [boxUsers, setBoxUsers] = useState([]);
@@ -74,103 +75,112 @@ const Userlist = () => {
     });
   };
   return (
-    <div className="w-[98%] m-auto relative">
+    <div className=" p-2 lg:p-0 w-full lg:w-[98%] m-auto relative">
       <div className="w-full">
-        <div className="w-full m-auto text-center mt-4">
+        <div className="w-full m-auto text-center mt-2">
           <h2 className="font-san font-bold text-2xl uppercase">User List</h2>
         </div>
 
         <Search state={handleSearch} />
-        <div className="w-[98%]">
-          <div className="w-[98.6%]">
-            <div className="flex">
-              <p className="font-san font-semibold text-base  border border-solid flex justify-center items-center  w-[70px] py-3">
-                Serial{" "}
-              </p>
-              <p className="font-san font-semibold text-base  border border-solid py-3 flex justify-center items-center  w-[300px]">
-                Member Name{" "}
-              </p>
-              <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[175px]">
-                STB ID Number{" "}
-              </p>
-              <p className="font-san font-semibold text-base flex items-center justify-center border border-solid py-3  w-[150px]">
-                Area Name{" "}
-              </p>
-              <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[130px]">
-                Issue Date{" "}
-              </p>
-              <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[110px]">
-                Status{" "}
-              </p>
-              <p className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[200px]">
-                Last Recharge Date{" "}
-              </p>
-              <button className="font-san font-semibold text-base flex justify-center items-center border border-solid py-3  w-[200px]">
-                Action
-              </button>
-            </div>
+        <div className="w-full">
+          <div className="w-full">
+            <ul className="flex w-full  font-san font-bold uppercase text-[10px] md:text-sm">
+              <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
+                SL
+              </li>
+              <li className=" w-[38%] md:w-[30%] h-[50px] border flex justify-center items-center">
+                Name
+              </li>
+              <li className=" w-[10%] md:w-[8%] h-[50px] border flex justify-center items-center">
+                stb id
+              </li>
+              <li className=" w-[18%] md:w-[15%] h-[50px] border flex justify-center items-center">
+                area
+              </li>
+              <li className=" w-[12%] md:w-[8%] h-[50px] border flex justify-center items-center">
+                Status
+              </li>
+              <li className="w-[10%] h-[50px] border hidden md:flex justify-center items-center">
+                {" "}
+                Issue
+              </li>
+              <li className="w-[14%] h-[50px] border hidden md:flex justify-center items-center">
+                {" "}
+                Last RCH
+              </li>
+              <li className="w-[12%] md:w-[10%] h-[50px] border flex justify-center items-center">
+                action
+              </li>
+            </ul>
           </div>
 
-          <div className="w-full h-[53vh] overflow-y-scroll">
+          <div id="user" className="h-[200px] md:h-[350px]">
             {search.length > 0
               ? search.map((item, index) => (
-                  <div className="flex">
-                    <p className="font-san font-normal text-sm  border border-solid flex justify-center items-center  w-[70px] py-3">
+                  <ul className="flex w-full  font-san font-normal uppercase text-[10px] md:text-sm">
+                    <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
                       {index + 1}
-                    </p>
-                    <p className="font-san font-normal text-sm  border border-solid py-3 flex justify-center items-center  w-[300px]">
+                    </li>
+                    <li className=" w-[38%] md:w-[30%] h-[50px] border flex justify-center items-center">
                       {item.clientName}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid   w-[170px]">
+                    </li>
+                    <li className=" w-[10%] md:w-[8%] h-[50px] border flex justify-center items-center">
                       {item.boxId}
-                    </p>
-                    <p className="font-san font-normal text-sm flex items-center justify-center border border-solid py-3  w-[160px]">
+                    </li>
+                    <li className=" w-[18%] md:w-[15%] h-[50px] border flex text-center justify-center items-center">
                       {item.areaname}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[130px]">
-                      {item.issueDate}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[110px]">
+                    </li>
+                    <li className=" w-[12%] md:w-[8%] h-[50px] border flex justify-center items-center">
                       Status{" "}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[200px]">
-                      Last Recharge Date{" "}
-                    </p>
-                    <button className="font-san font-normal text-sm  flex justify-center items-center border border-solid py-3 bg-[#634747] text-white  ">
-                      Details
-                    </button>
-                  </div>
-                ))
-              : boxUsers.map((item, index) => (
-                  <div className="flex">
-                    <p className="font-san font-normal text-sm  border border-solid flex justify-center items-center  w-[70px] py-3">
-                      {index + 1}
-                    </p>
-                    <p className="font-san font-normal text-sm  border border-solid py-3 flex justify-center items-center  w-[300px]">
-                      {item.clientName}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[175px]">
-                      {item.boxId}
-                    </p>
-                    <p className="font-san font-normal text-sm flex items-center justify-center border border-solid py-3  w-[150px]">
-                      {item.areaname}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[130px]">
+                    </li>
+                    <li className="w-[10%] h-[50px] border hidden  lg:flex justify-center items-center">
+                      {" "}
                       {item.issueDate}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[110px]">
-                      Status{" "}
-                    </p>
-                    <p className="font-san font-normal text-sm flex justify-center items-center border border-solid py-3  w-[200px]">
+                    </li>
+                    <li className="w-[14%] h-[50px] border hidden lg:flex justify-center items-center">
+                      {" "}
                       Last Recharge Date{" "}
-                    </p>
-                    <button
+                    </li>
+                    <li
                       onClick={() => handleDetails(item)}
-                      className="font-san font-normal text-base  flex justify-center items-center border border-solid py-3 bg-[#634747] text-white  w-[200px]"
+                      className=" cursor-pointer w-[12%] md:w-[10%] h-[50px] border flex justify-center bg-[#634747] text-white items-center"
                     >
                       Details
-                    </button>
-                  </div>
+                    </li>
+                  </ul>
+                ))
+              : boxUsers.map((item, index) => (
+                  <ul className="flex w-full  font-san font-normal uppercase text-[10px] md:text-sm">
+                    <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
+                      {index + 1}
+                    </li>
+                    <li className=" w-[38%] md:w-[30%] h-[50px] border flex justify-center items-center">
+                      {item.clientName}
+                    </li>
+                    <li className=" w-[10%] md:w-[8%] h-[50px] border flex justify-center items-center">
+                      {item.boxId}
+                    </li>
+                    <li className=" w-[18%] md:w-[15%] h-[50px] border flex text-center justify-center items-center">
+                      {item.areaname}
+                    </li>
+                    <li className=" w-[12%] md:w-[8%] h-[50px] border flex justify-center items-center">
+                      Status{" "}
+                    </li>
+                    <li className="w-[10%] h-[50px] border hidden md:flex justify-center items-center">
+                      {" "}
+                      {item.issueDate}
+                    </li>
+                    <li className="w-[14%] h-[50px] border hidden md:flex justify-center items-center">
+                      {" "}
+                      Last Recharge Date{" "}
+                    </li>
+                    <li
+                      onClick={() => handleDetails(item)}
+                      className=" cursor-pointer w-[12%] md:w-[10%] h-[50px] border flex justify-center bg-[#634747] text-white items-center"
+                    >
+                      Details
+                    </li>
+                  </ul>
                 ))}
           </div>
           {detailsPage && (
@@ -190,9 +200,12 @@ const Userlist = () => {
                 </div>
 
                 <div className="flex  p-5 mt-10">
-                  {details.map((item,index) => (
+                  {details.map((item, index) => (
                     <div className="flex ">
-                      <div key={index} className="flex flex-col items-center justify-between pr-[70px]">
+                      <div
+                        key={index}
+                        className="flex flex-col items-center justify-between pr-[70px]"
+                      >
                         <img className=" w-24 h-24 bg-red-500" />
                         <h3 className="font-san font-semibold text-base mt-3 text-black uppercase">
                           {item.clientName}

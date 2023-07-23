@@ -16,18 +16,18 @@ const Setting = () => {
   return (
     <div>
       {user && (
-        <div>
+        <div className=" relative">
           <Helmet>
             <title>Reminder</title>
           </Helmet>
           <div className="w-full">
             <Navbar />
           </div>
-          <div className="flex">
-            <div className="w-[10%]">
+          <div className="lg:flex">
+          <div className=" absolute bottom-[-364px]  left-0 lg:static  w-full lg:w-[15%]">
               <Sidebar active="settings" />
             </div>
-            <div className="w-[90%]">
+            <div className="lg:w-[90%]">
               <Settings />
             </div>
           </div>

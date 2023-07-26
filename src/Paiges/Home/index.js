@@ -12,7 +12,23 @@ import { Helmet } from "react-helmet";
 import { useSelector } from "react-redux";
 
 const Home = () => {
+  let auth = getAuth();
+  const [varify, setVarify] = useState(false);
+  const navigate = useNavigate();
+
   let user = useSelector((item) => item.auth.value);
+
+  // useEffect(() => {
+  //   if (!auth.currentUser) {
+  //     navigate("/login");
+  //   } else {
+  //     if (!auth.currentUser.emailVerified) {
+  //       setVarify(false);
+  //     } else {
+  //       setVarify(true);
+  //     }
+  //   }
+  // }, []);
 
   return (
     <>
@@ -25,7 +41,6 @@ const Home = () => {
             <Navbar />
           </div>
           <div className="lg:flex">
-            
             <div className=" absolute bottom-[-122px]  left-0 lg:static  w-full lg:w-[15%]">
               <Sidebar active="home" />
             </div>

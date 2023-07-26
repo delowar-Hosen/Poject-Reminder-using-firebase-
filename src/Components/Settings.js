@@ -5,7 +5,7 @@ import {
   AiFillDelete,
   AiFillSave,
   AiOutlineCloudUpload,
-  AiOutlineDownload
+  AiOutlineDownload,
 } from "react-icons/ai";
 import {
   BsChatDotsFill,
@@ -15,7 +15,7 @@ import {
 } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { FaUserEdit, FaCreditCard } from "react-icons/fa";
-import { MdOutlineCancelPresentation,MdRestore } from "react-icons/md";
+import { MdOutlineCancelPresentation, MdRestore } from "react-icons/md";
 import { useEffect } from "react";
 import { useState } from "react";
 import { getAuth, sendPasswordResetEmail, deleteUser } from "firebase/auth";
@@ -31,6 +31,8 @@ import {
 import Search from "./Search";
 import DocumentReader from "./DocumentReader";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authData } from "../reduxToolkit/authUserSlice";
 
 const Settings = () => {
   const [user, setUser] = useState([]);
@@ -56,6 +58,7 @@ const Settings = () => {
 
   const auth = getAuth();
   const db = getDatabase();
+  let dispatch = useDispatch();
 
   useEffect(() => {
     const notificationRef = ref(db, "users/");
@@ -177,13 +180,15 @@ const Settings = () => {
     remove(ref(db, "rechargeList/"));
   };
 
-  let handleHardReset = () => {
+  let handleHardReset = (item) => {
     remove(ref(db, "areas/"));
     let user = auth.currentUser;
-    remove(ref(db, "users/" + auth.currentUser.uid));
+    remove(ref(db, "users/" + user.uid));
     deleteUser(user)
       .then(() => {
         console.log("delete");
+        localStorage.removeItem("auth");
+        dispatch(authData(null));
       })
       .then(() => {
         navigate("/login");
@@ -275,14 +280,18 @@ const Settings = () => {
                 className="flex justify-center lg:justify-start items-center cursor-pointer"
               >
                 <GrPowerReset className="text-base lg:text-[27px] mr-2 lg:mr-9 " />
-                <span className="font-pop font-normal text-sm lg:text-xl">Reset</span>
+                <span className="font-pop font-normal text-sm lg:text-xl">
+                  Reset
+                </span>
               </p>
               <p
-                onClick={handleHardReset}
+                onClick={() => handleHardReset(user.map((item) => item))}
                 className="flex justify-center lg:justify-start items-center cursor-pointer"
               >
                 <MdRestore className=" text-base lg:text-[27px] mr-2 lg:mr-9 " />
-                <span className="font-pop font-normal text-sm lg:text-xl">Hard Reset</span>
+                <span className="font-pop font-normal text-sm lg:text-xl">
+                  Hard Reset
+                </span>
               </p>
             </div>
           </div>

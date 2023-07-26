@@ -58,20 +58,29 @@ const Login = () => {
             setLoader(false);
           } else {
             setSuccess("Welcome To Reminder");
-            const starCountRef = ref(db, "users/");
-            onValue(starCountRef, (snapshot) => {
-              let arr = [];
-              snapshot.forEach((item) => {
-                if (auth.currentUser.uid == item.val().id) {
-                  arr.push(item.val());
-                }
+            set(ref(db, "users/" + auth.currentUser.uid), {
+              name: auth.currentUser.displayName,
+              email: email,
+              id: auth.currentUser.uid,
+              key: auth.currentUser.uid,
+              avatar: auth.currentUser.photoURL,
+              created: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}-${new Date().getHours()}-${new Date().getMinutes()}`,
+            }).then(() => {
+              const starCountRef = ref(db, "users/");
+              onValue(starCountRef, (snapshot) => {
+                let arr = [];
+                snapshot.forEach((item) => {
+                  if (auth.currentUser.uid == item.val().id) {
+                    arr.push(item.val());
+                  }
+                });
+                dispatch(authData(arr));
+                localStorage.setItem("auth", JSON.stringify(arr));
               });
-              dispatch(authData(arr));
-              localStorage.setItem("auth", JSON.stringify(arr));
+              setTimeout(() => {
+                navigate("/");
+              }, 2000);
             });
-            setTimeout(() => {
-              navigate("/");
-            }, 2000);
           }
         })
         .catch((error) => {

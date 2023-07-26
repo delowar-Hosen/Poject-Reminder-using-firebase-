@@ -16,7 +16,7 @@ import Todo from "./Paiges/todo";
 function App() {
   return (
     <Routes>
-      <Route element={<Logoutuser />}>
+      <Route element={<Loginuser />}>
         <Route path="/" element={<Home />} />
         <Route path="/boxadd" element={<Boxadd />} />
         <Route path="/alert" element={<Alert />} />
@@ -26,7 +26,7 @@ function App() {
         <Route path="/settings" element={<Setting />} />
         <Route path="/download" element={<DocumentReader />} />
       </Route>
-      <Route element={<Loginuser />}>
+      <Route element={<Logoutuser  />}>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
       </Route>

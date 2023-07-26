@@ -84,13 +84,6 @@ const Registration = () => {
                 .then(() => {
                   setSuccess("");
                   setSuccess("Your Registration Is Complete");
-                  set(ref(db, "users/" + auth.currentUser.uid), {
-                    name: name,
-                    email: email,
-                    id: auth.currentUser.uid,
-                    avatar: auth.currentUser.photoURL,
-                    created: `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}-${new Date().getHours()}-${new Date().getMinutes()}`,
-                  });
                   setTimeout(() => {
                     navigate("/login");
                   }, 2000);

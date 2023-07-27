@@ -21,7 +21,7 @@ const Todo = () => {
             <Navbar />
           </div>
           <div className="lg:flex">
-            <div className=" absolute bottom-[-364px]  left-0 lg:static  w-full lg:w-[15%]">
+            <div className=" fixed z-50 bottom-0  left-0 lg:static  w-full lg:w-[15%]">
               <Sidebar active="todo" />
             </div>
             <div className="lg:w-[90%]">

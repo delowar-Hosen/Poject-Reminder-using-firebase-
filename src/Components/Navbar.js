@@ -87,10 +87,10 @@ const Navbar = () => {
     });
   }, []);
   return (
-    <div className=" border-b-2 p-2 lg:p-0  bg-[#868e96]  border-solid">
+    <div className=" border-b-2 p-2 lg:p-0    bg-[#868e96]  border-solid">
       <Container>
         <div
-          className="relative lg:flex items-center justify-between py-6 
+          className="relative lg:flex items-center justify-between py-6  
         "
         >
           {user.map((item) => (

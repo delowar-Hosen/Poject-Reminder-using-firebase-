@@ -22,7 +22,7 @@ const RCHList = () => {
             <Navbar />
           </div>
           <div className="lg:flex">
-            <div className=" absolute bottom-[-130px]  left-0 lg:static  w-full lg:w-[15%]">
+            <div className=" fixed bottom-0 z-50  left-0 lg:static  w-full lg:w-[15%]">
               <Sidebar active="rechargelist" />
             </div>
 

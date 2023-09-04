@@ -12,6 +12,7 @@ import DocumentReader from "./Components/DocumentReader";
 import Loginuser from "./Private Route/loginUser";
 import Logoutuser from "./Private Route/logoutUser";
 import Todo from "./Paiges/todo";
+import TodayBillPaid from "./Components/TodayBillPaid";
 
 function App() {
   return (
@@ -25,8 +26,9 @@ function App() {
         <Route path="/details" element={<Details />} />
         <Route path="/settings" element={<Setting />} />
         <Route path="/download" element={<DocumentReader />} />
+        <Route path="/todaypaidlist" element={<TodayBillPaid />} />
       </Route>
-      <Route element={<Logoutuser  />}>
+      <Route element={<Logoutuser />}>
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
       </Route>

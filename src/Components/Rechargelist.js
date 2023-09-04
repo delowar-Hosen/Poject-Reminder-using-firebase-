@@ -4,6 +4,8 @@ import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import Search from "./Search";
 import { useDispatch } from "react-redux";
 import { user } from "../reduxToolkit/userlistSlice";
+import TodayBillPaid from "./TodayBillPaid";
+import { Link } from "react-router-dom";
 
 const Rechargelist = () => {
   const [addRecharge, setAddRecharge] = useState(false);
@@ -96,12 +98,20 @@ const Rechargelist = () => {
           <h2 className="font-san text-center  font-bold text-2xl ">
             ADD RECHARGE LIST
           </h2>
-          <button
-            onClick={() => setAddRecharge(!addRecharge)}
-            className="font-san py-3 px-3 absolute top-8 lg:top-0 right-0  bg-black text-white rounded-md font-bold text-[10px] lg:text-base uppercase text-right"
-          >
-            Cancel
-          </button>
+          <div className="absolute top-8 lg:top-0 right-0">
+            <Link to="/todaypaidlist">
+              <button className="font-san py-3 px-3 mr-4   bg-black text-white rounded-md font-bold text-[10px] lg:text-base uppercase text-right">
+                Today Bill Paid
+              </button>
+            </Link>
+
+            <button
+              onClick={() => setAddRecharge(!addRecharge)}
+              className="font-san py-3 px-3  bg-black text-white rounded-md font-bold text-[10px] lg:text-base uppercase text-right"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       ) : (
         <div>

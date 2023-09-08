@@ -7,6 +7,7 @@ const PdfDownloadButton = ({ click }) => {
   const [userList, setUserList] = useState([]);
   const [rechargeList, setRechargeList] = useState([]);
   const [paidList, setPaidList] = useState([]);
+  const [todayPaidBill, setTodayPaidBill] = useState([]);
 
   const db = getDatabase();
 
@@ -40,6 +41,19 @@ const PdfDownloadButton = ({ click }) => {
         arr.push(item.val());
       });
       setPaidList(arr);
+    });
+  }, []);
+
+  useEffect(() => {
+    const starCountRef = ref(db, "everdayBillPaid/");
+    onValue(starCountRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (item.val().date == new Date().toLocaleDateString()) {
+          arr.push(item.val());
+        }
+      });
+      setTodayPaidBill(arr);
     });
   }, []);
 
@@ -127,26 +141,25 @@ const PdfDownloadButton = ({ click }) => {
         },
       });
       doc.save(`Paid List ${new Date().toLocaleDateString()}`);
-    }
-    // else if (pdf == "reminder") {
-    //   const tableData = reminders.map((item, index) => [
-    //     index + 1,
-    //     item.clientName,
-    //     item.areaname,
-    //     item.phone,
-    //     item.boxId,
-    //     item.RechargeEndDate,
-    //   ]);
+    } else if (pdf == "todaypaidbill") {
+      const tableData = todayPaidBill.map((item, index) => [
+        index + 1,
+        item.name,
+        item.area,
+        item.date,
+        item.paidBy,
+        item.taka,
+      ]);
 
-    //   doc.autoTable({
-    //     head: [["Serial", "Name", "Area", "Phone", "ID", "End Date"]],
-    //     body: tableData,
-    //     options: {
-    //       pageSize: "A4",
-    //     },
-    //   });
-    //   doc.save(`Reminder List${new Date()}`);
-    // }
+      doc.autoTable({
+        head: [["Serial", "Name", "Area", "Date", "Paid By", "Taka"]],
+        body: tableData,
+        options: {
+          pageSize: "A4",
+        },
+      });
+      doc.save(`${new Date().toLocaleDateString()} Bill Paid List`);
+    }
   };
 
   return (
@@ -178,6 +191,12 @@ const PdfDownloadButton = ({ click }) => {
           className="font-san font-normal text-sm flex rounded-lg justify-center bg-[#634747]  items-center border border-solid py-3  w-[100px]"
         >
           Reminder List
+        </button>
+        <button
+          onClick={() => handlePdf("todaypaidbill")}
+          className="font-san font-normal text-sm flex rounded-lg justify-center bg-[#634747]  items-center border border-solid py-3  w-[100px]"
+        >
+          Today Bill Paid
         </button>
       </div>
       <h4

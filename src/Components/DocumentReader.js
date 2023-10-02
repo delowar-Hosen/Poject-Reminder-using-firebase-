@@ -8,6 +8,7 @@ const PdfDownloadButton = ({ click }) => {
   const [rechargeList, setRechargeList] = useState([]);
   const [paidList, setPaidList] = useState([]);
   const [todayPaidBill, setTodayPaidBill] = useState([]);
+  const [todayRecharge, setTodayRecharge] = useState([]);
 
   const db = getDatabase();
 
@@ -54,6 +55,19 @@ const PdfDownloadButton = ({ click }) => {
         }
       });
       setTodayPaidBill(arr);
+    });
+  }, []);
+
+  useEffect(() => {
+    const starCountRef = ref(db, "todayRecharge/");
+    onValue(starCountRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (item.val().date == new Date().toLocaleDateString()) {
+          arr.push(item.val());
+        }
+      });
+      setTodayRecharge(arr);
     });
   }, []);
 
@@ -107,7 +121,7 @@ const PdfDownloadButton = ({ click }) => {
           pageSize: "A4",
         },
       });
-      doc.save(`Recharge List ${new Date().toLocaleDateString()}`);
+      doc.save(`Recharge List Untill ${new Date().toLocaleDateString()}`);
     } else if (pdf == "paid") {
       const tableData = paidList.map((item, index) => [
         index + 1,
@@ -149,16 +163,37 @@ const PdfDownloadButton = ({ click }) => {
         item.date,
         item.paidBy,
         item.taka,
+        item.memoNo,
       ]);
 
       doc.autoTable({
-        head: [["Serial", "Name", "Area", "Date", "Paid By", "Taka"]],
+        head: [
+          ["Serial", "Name", "Area", "Date", "Paid By", "Taka", "Memo no"],
+        ],
         body: tableData,
         options: {
           pageSize: "A4",
         },
       });
       doc.save(`${new Date().toLocaleDateString()} Bill Paid List`);
+    } else if (pdf == "todayRecharge") {
+      const tableData = todayRecharge.map((item, index) => [
+        index + 1,
+        item.name,
+        item.area,
+        item.date,
+        item.paidBy,
+        item.taka,
+      ]);
+
+      doc.autoTable({
+        head: [["Serial", "Name", "Area", "Date", "By Who", "Taka"]],
+        body: tableData,
+        options: {
+          pageSize: "A4",
+        },
+      });
+      doc.save(`${new Date().toLocaleDateString()} Recharge List`);
     }
   };
 
@@ -167,7 +202,7 @@ const PdfDownloadButton = ({ click }) => {
       <h4 className="font-san  text-black font-semibold text-xl mb-4">
         Store Your Document
       </h4>
-      <div className="flex mt-8 gap-x-2">
+      <div className="flex flex-wrap  justify-center  gap-5 mt-8 gap-x-2">
         <button
           onClick={() => handlePdf("user")}
           className="font-san font-normal text-sm flex justify-center rounded-lg bg-[#634747]  items-center border border-solid py-3  w-[100px]"
@@ -191,6 +226,12 @@ const PdfDownloadButton = ({ click }) => {
           className="font-san font-normal text-sm flex rounded-lg justify-center bg-[#634747]  items-center border border-solid py-3  w-[100px]"
         >
           Reminder List
+        </button>
+        <button
+          onClick={() => handlePdf("todayRecharge")}
+          className="font-san font-normal text-sm flex rounded-lg  bg-[#634747]  border border-solid py-3  w-[100px]"
+        >
+          Today Recharge
         </button>
         <button
           onClick={() => handlePdf("todaypaidbill")}

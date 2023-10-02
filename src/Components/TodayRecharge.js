@@ -1,31 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { getDatabase, ref, set, push } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { getDatabase, ref, set, push } from "firebase/database";
 
-const TodayBillPaid = () => {
-  const [number, setNumber] = useState("");
-  const [count, setCount] = useState("");
-  const [err, setErr] = useState("");
+const TodayRecharge = () => {
+
+
   const [name, setName] = useState("");
   const [area, setArea] = useState("");
   const [taka, setTaka] = useState("");
   const [paid, setPaid] = useState("");
-  const [memo, setMemo] = useState("");
-  const [data, setData] = useState([]);
 
   const db = getDatabase();
-  const auth = getAuth();
-
-  // let handleCount = (number, paid) => {
-  //   if (!number) {
-  //     setErr("Please give total bill number");
-  //   } else if (!paid) {
-  //     setErr("Please give who recived money and memo");
-  //   }
-  //   console.log("nuumber", number, "paid", paid);
-  //   setCount(number);
-  // };
 
   let handleData = () => {
     if (!name) {
@@ -37,67 +22,33 @@ const TodayBillPaid = () => {
     } else if (!paid) {
       console.log("Please fill Paid by ");
     } else {
-      set(push(ref(db, "everdayBillPaid/")), {
+      set(push(ref(db, "todayRecharge/")), {
         name: name,
         area: area,
         taka: taka,
-        paidBy: paid,
-        memoNo: memo,
+        rechargeBy: paid,
         date: new Date().toLocaleDateString(),
       }).then(() => {
         setName("");
         setArea("");
         setPaid("");
         setTaka("");
-        setMemo("");
+      
       });
     }
   };
-
   
 
   return (
     <div className="bg-[#0000008a] w-full h-screen">
       <div className="flex justify-center items-center  ">
         <div className=" mt-4   font-san text-base w-[750px] h-[600px]  font-normal">
-          {/* {!count > 0 && (
-            <>
-              <div className="font-san pb-2 font-semibold text-base gap-y-1 flex flex-col justify-center  items-center ">
-                <div className="flex">
-                  <h4 className="text-white">Total Bill Count :</h4>
-                  <input
-                    onChange={(e) => setNumber(e.target.value)}
-                    className="py-1 px-2 ml-2 rounded-md outline-none"
-                    placeholder="Enter bill number"
-                  />
-                </div>
-
-                <div className="flex text-white ml-[65px]">
-                  <p>
-                    Paid By :{" "}
-                    <input
-                      onChange={(e) => setPaid(e.target.value)}
-                      className="py-1 px-2  rounded-md outline-none text-black"
-                      placeholder="Paid by"
-                    />
-                  </p>
-                </div>
-                <button
-                  onClick={() => handleCount(number, paid)}
-                  className="font-san  text-white font-normal py-1 px-2 border mt-2 ml-[120px] rounded-md"
-                >
-                  Submit
-                </button>
-              </div>
-            </>
-          )} */}
-          {/* {count.length > 0 && ( */}
           <div className="flex flex-col gap-y-1">
             <div>
               {/* {Array.from({ length: count }, (_, i) => (
                   <> */}
-              <h2 className=" mt-20 flex justify-center font-bold items-center font-san text-xl text-white uppercase">
-                Today Bill Paid
+              <h2 className=" mt-20 flex justify-center font-bold items-center font-san text-xl uppercase text-white ">
+                Today Recharge
               </h2>
               <div className="mb-1 mt-10 flex gap-y-2 flex-col justify-center items-center">
                 <span className="text-white w-[40px] inline-block "></span>{" "}
@@ -123,24 +74,15 @@ const TodayBillPaid = () => {
                   onChange={(e) => setPaid(e.target.value)}
                   value={paid}
                   className="py-1 px-2  w-[200px]   rounded-md outline-none text-black"
-                  placeholder="Paid by"
+                  placeholder="Recharge by"
                 />
-                <input
-                  onChange={(e) => setMemo(e.target.value)}
-                  value={memo}
-                  className="py-1 px-2  w-[200px]   rounded-md outline-none text-black"
-                  placeholder="Memo Number"
-                />
+                
               </div>
-              {/* </> */}
-              {/* ))} */}
+            
             </div>
 
             <div className="flex justify-center items-center font-san mt-5 font-bold text-base">
-              <button
-                onClick={handleData}
-                className="text-white border py-1 px-2 rounded-md"
-              >
+              <button onClick={handleData} className="text-white border py-1 px-2 rounded-md">
                 Submit
               </button>
               <Link to="/rechargelist">
@@ -157,4 +99,4 @@ const TodayBillPaid = () => {
   );
 };
 
-export default TodayBillPaid;
+export default TodayRecharge;

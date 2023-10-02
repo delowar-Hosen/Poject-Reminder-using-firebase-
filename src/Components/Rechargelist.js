@@ -98,10 +98,15 @@ const Rechargelist = () => {
           <h2 className="font-san text-center  font-bold text-2xl ">
             ADD RECHARGE LIST
           </h2>
-          <div className="absolute top-8 lg:top-0 right-0">
+          <div className="absolute top-8 lg:top-16 right-0">
             <Link to="/todaypaidlist">
               <button className="font-san py-3 px-3 mr-4   bg-black text-white rounded-md font-bold text-[10px] lg:text-base uppercase text-right">
                 Today Bill Paid
+              </button>
+            </Link>
+            <Link to="/todayrecharge">
+              <button className="font-san py-3 px-3 mr-4   bg-black text-white rounded-md font-bold text-[10px] lg:text-base uppercase text-right">
+                Today Recharge
               </button>
             </Link>
 

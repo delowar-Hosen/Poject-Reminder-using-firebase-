@@ -13,6 +13,7 @@ import Loginuser from "./Private Route/loginUser";
 import Logoutuser from "./Private Route/logoutUser";
 import Todo from "./Paiges/todo";
 import TodayBillPaid from "./Components/TodayBillPaid";
+import TodayRecharge from "./Components/TodayRecharge";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/settings" element={<Setting />} />
         <Route path="/download" element={<DocumentReader />} />
         <Route path="/todaypaidlist" element={<TodayBillPaid />} />
+        <Route path="/todayrecharge" element={<TodayRecharge />} />
       </Route>
       <Route element={<Logoutuser />}>
         <Route path="/login" element={<Login />} />

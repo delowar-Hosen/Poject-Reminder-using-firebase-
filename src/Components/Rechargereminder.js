@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import "../../src/index.css";
+
 const Rechargereminder = () => {
   const [alertRechargeList, setAlertRechargeList] = useState([]);
 
@@ -96,9 +97,9 @@ const Rechargereminder = () => {
           </h2>
         </div>
       ) : (
-        alertRechargeList.map((item, index) => (
-          <div id="user" className="h-[200px] lg:h-[350px]">
-            <ul className="  flex w-full  font-san font-normal uppercase text-[10px] md:text-sm">
+        <div id="user" className="h-[200px] lg:h-[350px">
+          {alertRechargeList.map((item, index) => (
+            <ul className="  flex  w-full  font-san font-normal uppercase text-[10px] md:text-sm">
               <li className=" w-[12%] md:w-[5%] h-[50px] border flex justify-center items-center">
                 {index + 1}
               </li>
@@ -126,8 +127,8 @@ const Rechargereminder = () => {
                 Send Message
               </li>
             </ul>
-          </div>
-        ))
+          ))}
+        </div>
       )}
     </div>
   );
